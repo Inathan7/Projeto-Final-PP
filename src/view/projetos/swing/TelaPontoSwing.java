@@ -227,8 +227,9 @@ public class TelaPontoSwing extends JFrame implements TelaPonto {
 					}
 				} else {
 					mostrarMensagem("Não há ninguém cadastrado");
+					
 				}
-				Integer[] projetosComboBoxAtualizado = new Integer[controllerProjeto.getProjetos().size()];
+				Integer[] projetosComboBoxAtualizado = new Integer[controllerMembro.getMembros().size()];
 				for(int i = 0; i<controllerProjeto.getProjetos().size(); i++) {
 					if(controllerProjeto.getProjetos().get(i).getMembros().size() != 0 ) {
 						for (int j = 0; j < controllerProjeto.getProjetos().get(i).getMembros().size(); j++) {

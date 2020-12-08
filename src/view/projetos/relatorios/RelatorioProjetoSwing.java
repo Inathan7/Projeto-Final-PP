@@ -14,12 +14,19 @@ import javax.swing.text.html.HTML;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 
+import fachadas.Fachada3Grupo;
+import fachadas.Fachada4Edital;
+import fachadas.Fachada5Projeto;
+import model.projetos.Edital;
+import model.projetos.Grupo;
+import model.projetos.Projeto;
+
 public class RelatorioProjetoSwing extends JFrame implements MontadorRelatorioProjeto {
 	
-	
 	private String relatorio;
-
-
+	
+	Fachada4Edital fachadaEdital = new Fachada4Edital();
+	Fachada3Grupo fachadaGrupo = new Fachada3Grupo();
 
 	
 	public SwingJPanel getProduto() {
@@ -28,15 +35,8 @@ public class RelatorioProjetoSwing extends JFrame implements MontadorRelatorioPr
 		return swing;
 	}
 
-//	@Override
-//	public void gerarRelatorio() {
-//
-//		Fachada8Relatorio fachada = new Fachada8Relatorio();
-//		relatorio = fachada.gerarRelatorioGeral();
-//		
-//	}
-
-	public void contruirInterface() {
+	@Override
+	public void contruirInterface(String relatorio) {
 		HTMLEditorKit htmlEdKit = new HTMLEditorKit();
 		HTMLDocument htmlDoc = (HTMLDocument) htmlEdKit.createDefaultDocument();
 		HTML html = new HTML();
@@ -72,19 +72,54 @@ public class RelatorioProjetoSwing extends JFrame implements MontadorRelatorioPr
 
 	@Override
 	public String gerarRelatorioEdital() {
-		return "";
+		//Usa tags HTML
+		relatorio += "<body Style='text-align: center'>";
+		for(Edital edital : fachadaEdital.getEditais()){
+			relatorio += "<h3 Style='text-align: center; font: 21px verdana;'>[Edital ID: "+edital.getId()+"]</h3>";
+			relatorio += "[NOME] - "+edital.getNome()+"<br>";
+			relatorio += "[DATA INICIO] - "+edital.getDataInicio()+"<br>";
+			relatorio += "[DATA TERMINO] - "+edital.getDataTermino()+"<br>";
+			relatorio += "[CUSTO TOTAL] - "+edital.getCustoTotal()+"<br>";
+			relatorio += "[CAPITAL NÃO GASTO] - "+edital.getCapitalReaisNaoGastoTotal()+"<br>";
+			relatorio += "[CUSTEIO NÃO GASTO] - "+edital.getCusteioReaisNaoGastoTotal()+"<br>";
+			relatorio +="[EDITAL ATIVO] - "+edital.getAtivo()+"<br>";
+			relatorio += "</body>";
+		}
+		return relatorio;
 		
 	}
 
 	@Override
 	public String gerarRelatorioGrupo() {
-		return "";
-		
+		//Usa tags HTML
+		relatorio += "<body Style='text-align: center'>";
+		for(Grupo grupo : fachadaGrupo.getGrupos()){
+			relatorio += "<h3 Style='text-align: center; font: 21px verdana;'>[Grupo ID: "+grupo.getId()+"]</h3>";
+			relatorio += "[LINK CNPq] - "+grupo.getLinkCNPq()+"<br/>";
+			relatorio += "[DATA CRIAÇÂO] - "+grupo.getDataCriacao()+"<br/>";
+			relatorio += "[GRUPO ATIVO] - "+grupo.getAtivo()+"<br/>";
+			relatorio += "</body>";
+		}
+		return relatorio;
 	}
 
 	@Override
 	public String gerarRelatorioProjeto() {
-		return "";
+		//Usa tags HTML
+		relatorio += "<body Style='text-align: center'>";
+		for(Projeto p: Fachada5Projeto.getProjetosPersistidos()){
+			relatorio += "<h3 Style='text-align: center; font: 21px verdana;'>[Projeto ID: "+p.getId()+"]</h3>";
+			relatorio += "Nome do projeto: "+p.getNome()+"<br/>";
+			relatorio += "Gastos executados capital: "+p.getGastoExecutadoCapitalReais()+"<br/>";
+			relatorio += "Gastos executados custeio: "+p.getGastoExecutadoCusteioReais()+"<br/>";
+			relatorio += "Aporte capital: "+p.getAporteCapitalReais()+"<br/>";
+			relatorio += "Aporte custeio: "+p.getAporteCusteioReais()+"<br/>";
+			relatorio += "Data inicio: "+p.getDataInicio()+"<br/>";
+			relatorio += "Data termino: "+p.getDataTermino()+"<br/>";
+			relatorio += "Custo Total: "+p.getCustoTotal()+"<br/>";
+			relatorio += "</body>";
+		}
+		return relatorio;
 		
 	}
 

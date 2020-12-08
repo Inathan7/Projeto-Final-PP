@@ -118,6 +118,32 @@
             <coordenador>true</coordenador>
           </participacao>
         </model.autenticacao.Membro>
+        <model.autenticacao.Membro>
+          <matricula>99772263</matricula>
+          <nome>Paulo</nome>
+          <ativo>true</ativo>
+          <email>Paulo@gmail.com</email>
+          <administrador>true</administrador>
+          <contaEmail class="model.autenticacao.ContaEmailLivre">
+            <conta class="model.autenticacao.ContaAutenticacaoProvedorInterno"/>
+            <login>Paulo@gmail.com</login>
+            <senha>paulo123</senha>
+          </contaEmail>
+          <participacao>
+            <id>2</id>
+            <nome>Paulo</nome>
+            <ativo>true</ativo>
+            <dataInicio>2020</dataInicio>
+            <dataTermino>2020</dataTermino>
+            <compositorProjeto>
+              <model.projetos.Projeto reference="../../../../.."/>
+            </compositorProjeto>
+            <aporteCusteioMensalReais>2000.0</aporteCusteioMensalReais>
+            <qtdMesesCusteados>8</qtdMesesCusteados>
+            <qtdMesesPagos>4</qtdMesesPagos>
+            <coordenador>true</coordenador>
+          </participacao>
+        </model.autenticacao.Membro>
       </membros>
     </model.projetos.Projeto>
   </projetos>

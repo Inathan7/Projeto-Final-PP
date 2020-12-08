@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import fachadas.Fachada8Relatorio;
 import view.autenticacao.FabricaTela;
 import view.autenticacao.swing.FabricaTelaSwing;
 import view.autenticacao.swing.SetLookAndFeel;
@@ -16,6 +17,7 @@ import view.autenticacao.swing.SetLookAndFeel;
 public class TelaEscolherTipoRelatorio extends JFrame {
 	
 	private FabricaTela fabricaTela = new FabricaTelaSwing();
+	private Fachada8Relatorio fachadaRelatorio = new Fachada8Relatorio();
 	
 	public TelaEscolherTipoRelatorio() {
 		setTitle("Menu");
@@ -67,12 +69,13 @@ public class TelaEscolherTipoRelatorio extends JFrame {
 			case "Gerar Relatório Swing":
 				dispose();
 				//Logica gerar Relatorio Swing
+				fachadaRelatorio.relatorioSwing();
 				break;
 
 			case "Gerar Relatório HTML":
 				dispose();
 			//Logica gerar Relatorio HTML
-				JOptionPane.showMessageDialog(null, "Relatório HTML Gerado no Diretório do Projeto");
+				fachadaRelatorio.relatorioHTML();
 				break;
 				
 			case "":

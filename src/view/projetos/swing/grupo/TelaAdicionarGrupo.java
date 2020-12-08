@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import controller.ControllerGrupo;
-import controller.ControllerMembro;
 import controller.ControllerProjeto;
 import view.autenticacao.FabricaTela;
 import view.autenticacao.swing.FabricaTelaSwing;

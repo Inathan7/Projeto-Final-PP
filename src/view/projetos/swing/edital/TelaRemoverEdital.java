@@ -21,8 +21,8 @@ public class TelaRemoverEdital extends JFrame{
 
 	private FabricaTela fabricaTela = new FabricaTelaSwing();
 	private ControllerEdital controllerEdital = new ControllerEdital();
-	
-	private JComboBox<String> listEditais;
+
+	private JComboBox<Integer> listEditais;
 
 	public TelaRemoverEdital() {
 		setTitle("Remover Edital");
@@ -54,12 +54,12 @@ public class TelaRemoverEdital extends JFrame{
 	}
 
 	private void addJComboBox() {
-		String[] editaisComboBox = new String[controllerEdital.getEditais().size()];
+		Integer[] editaisComboBox = new Integer[controllerEdital.getEditais().size()];
 		for (int i=0; i<controllerEdital.getEditais().size(); i++) {
-			editaisComboBox[i] = (controllerEdital.getEditais().get(i).getNome());
+			editaisComboBox[i] = (controllerEdital.getEditais().get(i).getId());
 		}
-		
-		listEditais = new JComboBox<String>(editaisComboBox);
+
+		listEditais = new JComboBox<Integer>(editaisComboBox);
 		listEditais.setBackground(Color.gray);
 		listEditais.setBounds(120, 110, 120, 30);
 		add(listEditais);
@@ -96,15 +96,19 @@ public class TelaRemoverEdital extends JFrame{
 
 			switch (evento) {
 			case "Remover":
-				int index = listEditais.getSelectedIndex();
+				int index = (Integer)listEditais.getSelectedItem();
 
-				for (int i = 0; i < controllerEdital.getEditais().size(); i++) {
-					if(controllerEdital.getEditais().get(i).equals(controllerEdital.getEditais().get(index))) {
-						controllerEdital.removerEdital(index);
-						JOptionPane.showMessageDialog(null, "Edital Removido");
-						listEditais.repaint();
-					}
+				controllerEdital.removerEdital(index);
+				JOptionPane.showMessageDialog(null, "Edital Removido");
+				
+				Integer[] editaisComboBox = new Integer[controllerEdital.getEditais().size()];
+				for (int i=0; i<controllerEdital.getEditais().size(); i++) {
+					editaisComboBox[i] = (controllerEdital.getEditais().get(i).getId());
 				}
+				
+				JComboBox<Integer> comboBoxAtualizado = new JComboBox<Integer>(editaisComboBox);
+				listEditais.setModel(comboBoxAtualizado.getModel());
+
 				break;
 
 			case "Finalizar":
