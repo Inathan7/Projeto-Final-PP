@@ -72,13 +72,11 @@ public class Fachada5Projeto {
 	 */
 	public void removerMembroNoProjeto(Membro membro, int idDoProjeto) {
 		try{
-			// remove o membro do projeto
 			Projeto projeto = pesquisarProjeto(idDoProjeto);
 			projeto.removerMembro(membro);
 			projeto.setMembros(projeto.getMembros());
 			projetoParticipacao.atualizar();
 		}catch(Exception e){
-			System.out.println("Não foi possivel remover o membro");
 		}
 	}
 	/**
