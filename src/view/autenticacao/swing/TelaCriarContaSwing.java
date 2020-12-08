@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 
 import controller.ControllerCadastrarContaMembro;
 import controller.ControllerProjeto;
+import exception.ExceptionMembroDuplicado;
 import view.autenticacao.FabricaTela;
 import view.autenticacao.TelaCriarConta;
 
@@ -258,7 +259,13 @@ public class TelaCriarContaSwing extends JFrame implements TelaCriarConta {
 				for (int i = 0; i < controllerProjeto.getProjetos().size(); i++) {
 					if(controllerProjeto.getProjetos().get(i).equals(controllerProjeto.pesquisarProjeto(idProjeto))) {
 						controllerCadastrarContaMembro.addParticipacao(controllerProjeto.pesquisarProjeto(idProjeto), aporteCusteioMensalReais, qtdMesesCusteados, qtdMesesPagos);
-						mostrarMensagem("Adiconado!");
+						try {
+							controllerProjeto.pesquisarProjeto(idProjeto).adicionarMembro(controllerCadastrarContaMembro.getMembro());
+							controllerProjeto.atualizarProjeto();
+							mostrarMensagem("Adiconado!");
+						} catch (ExceptionMembroDuplicado e1) {
+							JOptionPane.showMessageDialog(null, e1.getMessage());
+						}
 					}
 				}
 				

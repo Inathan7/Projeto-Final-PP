@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import controller.ControllerCadastrarContaMembro;
 import controller.ControllerMembro;
 import controller.ControllerProjeto;
 import exception.ExceptionMembroDuplicado;
@@ -254,6 +255,8 @@ public class TelaAtualizarProjeto extends JFrame{
 				long matriculaRemover = (Long)listMembrosProjeto.getSelectedItem();
 
 				controllerProjeto.removerMembroDoProjeto(controllerMembro.pesquisar(matriculaRemover), idProjeto);
+				controllerMembro.pesquisar(matriculaRemover).getParticipacao().remover(controllerProjeto.pesquisarProjeto(idProjeto));
+				controllerMembro.atualizar();
 				JOptionPane.showMessageDialog(null, "Removido!");
 
 
@@ -264,6 +267,8 @@ public class TelaAtualizarProjeto extends JFrame{
 
 				try {
 					controllerProjeto.adicionarMembroNoProjeto(controllerMembro.pesquisar(matricula), idProjeto);
+					controllerMembro.pesquisar(matricula).getParticipacao().adicionar(controllerProjeto.pesquisarProjeto(idProjeto));
+					controllerMembro.atualizar();
 					JOptionPane.showMessageDialog(null, "Adicionado!");
 				} catch (ExceptionMembroDuplicado e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());

@@ -76,5 +76,15 @@ public class Participacao extends CompositorProjeto {
 	public HorarioPrevisto getHorarioPrevisto(){
 		return horario;
 	}
+	@Override
+	public void remover(CompositorProjeto compositorProjeto) {
+		for(CompositorProjeto com: getCompositorProjeto()){
+			if(com.getId()== com.getId()){
+				getCompositorProjeto().remove(com);
+				setCompositorProjeto(getCompositorProjeto());
+				break;
+			}
+		}
+	}
 }
 

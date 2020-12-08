@@ -275,7 +275,6 @@ public class TelaPontoSwing extends JFrame implements TelaPonto {
 					}
 				}
 				dispose();
-
 				break;
 
 			case "Voltar":

@@ -58,5 +58,7 @@ public class ControllerCadastrarContaMembro {
 		participacao.adicionar(projeto);
 		fachadaMembro.atualizarMembro();
 	}
-
+	public Membro getMembro(){
+		return membro;
+	}
 }
