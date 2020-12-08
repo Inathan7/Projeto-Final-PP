@@ -147,6 +147,8 @@ public class TelaAtualizarProjeto extends JFrame{
 		listProjetos = new JComboBox<Integer>(projetosComboBox);
 		listProjetos.setBackground(Color.gray);
 		listProjetos.setBounds(100, 110, 130, 30);
+		OuvinteComboBox ouvinteCombo = new OuvinteComboBox();
+		listProjetos.addActionListener(ouvinteCombo);
 		add(listProjetos);
 
 		//Lista dos membros
@@ -217,6 +219,32 @@ public class TelaAtualizarProjeto extends JFrame{
 		buttonRemoverMembroDoGrupo.addActionListener(ouvinteBotao);
 	}
 
+	public class OuvinteComboBox implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Long[] membrosComboBox = new Long[controllerMembro.getMembros().size()];
+			for (int i=0; i<controllerMembro.getMembros().size(); i++) {
+				
+				membrosComboBox[i] = controllerMembro.getMembros().get(i).getMatricula();
+			}
+			JComboBox<Long> comboM = new JComboBox<Long>(membrosComboBox);
+			listMembros.setModel(comboM.getModel());
+			
+			int id = (Integer)listProjetos.getSelectedItem();
+
+			//Lista dos membros que estão no projeto selecionado
+			Long[] membrosProjetoComboBox = new Long[controllerProjeto.pesquisarProjeto(id).getMembros().size()];
+			if(controllerProjeto.getProjetos().size() > 0) {
+				for (int i=0; i<controllerProjeto.pesquisarProjeto(id).getMembros().size(); i++) {
+						membrosProjetoComboBox[i] = controllerProjeto.pesquisarProjeto(id).getMembros().get(i).getMatricula();
+				}
+			}
+			JComboBox<Long> comboP = new JComboBox<Long>(membrosProjetoComboBox);
+			listMembrosProjeto.setModel(comboP.getModel());
+		}
+		
+	}
 	public class OuvinteBotao implements ActionListener{
 
 		@Override

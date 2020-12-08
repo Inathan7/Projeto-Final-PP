@@ -25,7 +25,7 @@ public class TelaAtualizarEdital extends JFrame {
 	
 	private JTextField txtNovoNome;
 	private JTextField txtTermino;
-	private JComboBox<String> listEditais;
+	private JComboBox<Integer> listEditais;
 
 	public TelaAtualizarEdital() {
 		setTitle("Atualizar Edital");
@@ -80,12 +80,12 @@ public class TelaAtualizarEdital extends JFrame {
 	}
 
 	public void addComboBox() {
-		String[] editaisComboBox = new String[controllerEdital.getEditais().size()];
+		Integer[] editaisComboBox = new Integer[controllerEdital.getEditais().size()];
 		for (int i=0; i<controllerEdital.getEditais().size(); i++) {
-			editaisComboBox[i] = controllerEdital.getEditais().get(i).getNome();
+			editaisComboBox[i] = controllerEdital.getEditais().get(i).getId();
 		}
 		
-		listEditais = new JComboBox<String>(editaisComboBox);
+		listEditais = new JComboBox<Integer>(editaisComboBox);
 		listEditais.setBackground(Color.gray);
 		listEditais.setBounds(100, 110, 130, 30);
 		add(listEditais);

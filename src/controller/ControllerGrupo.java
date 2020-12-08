@@ -29,7 +29,14 @@ public class ControllerGrupo {
 	public void addMembroAogrupo(Membro membro) {
 		fachadaGrupo.adicionarMembroNoGrupo(membro, grupo.getId());
 	}
-	
+	public Grupo pesquisarGrupo(int idGrupo){
+		try {
+			return fachadaGrupo.pesquisarGrupo(idGrupo);
+		} catch (Exception e) {
+			
+		}
+		return null;
+	}
 	//usa em atualizar
 	public void addMembroAogrupo(Membro membro, int id) {
 		fachadaGrupo.adicionarMembroNoGrupo(membro, id);

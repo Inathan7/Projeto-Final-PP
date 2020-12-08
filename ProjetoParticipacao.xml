@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<persistenciaXML.DAOProjeto>
+  <projetos>
+    <model.projetos.Projeto>
+      <id>1</id>
+      <nome>Teste</nome>
+      <ativo>true</ativo>
+      <dataInicio>2020</dataInicio>
+      <dataTermino>2020</dataTermino>
+      <compositorProjeto/>
+      <aporteCusteioReais>1000.0</aporteCusteioReais>
+      <aporteCapitalReais>1000.0</aporteCapitalReais>
+      <gastoExecutadoCusteioReais>1000.0</gastoExecutadoCusteioReais>
+      <gastoExecutadoCapitalReais>1000.0</gastoExecutadoCapitalReais>
+      <membros>
+        <model.autenticacao.Membro>
+          <matricula>253253</matricula>
+          <nome>paulo</nome>
+          <ativo>true</ativo>
+          <email>paulo@gmail.com</email>
+          <administrador>true</administrador>
+          <contaEmail class="model.autenticacao.ContaEmailLivre">
+            <conta class="model.autenticacao.ContaAutenticacaoProvedorInterno"/>
+            <login>paulo@gmail.com</login>
+            <senha>paulo123</senha>
+          </contaEmail>
+          <participacao>
+            <id>2</id>
+            <nome>paulo</nome>
+            <ativo>true</ativo>
+            <dataInicio>2020</dataInicio>
+            <dataTermino>2020</dataTermino>
+            <compositorProjeto>
+              <model.projetos.Projeto reference="../../../../.."/>
+            </compositorProjeto>
+            <aporteCusteioMensalReais>4000.0</aporteCusteioMensalReais>
+            <qtdMesesCusteados>12</qtdMesesCusteados>
+            <qtdMesesPagos>11</qtdMesesPagos>
+            <coordenador>true</coordenador>
+          </participacao>
+        </model.autenticacao.Membro>
+        <model.autenticacao.Membro>
+          <matricula>24353</matricula>
+          <nome>debora</nome>
+          <ativo>true</ativo>
+          <email>debora@gmail.com</email>
+          <administrador>false</administrador>
+          <contaEmail class="model.autenticacao.ContaEmailLivre">
+            <conta class="model.autenticacao.ContaAutenticacaoProvedorInterno"/>
+            <login>debora@gmail.com</login>
+            <senha>debora123</senha>
+          </contaEmail>
+          <participacao>
+            <id>3</id>
+            <nome>debora</nome>
+            <ativo>true</ativo>
+            <dataInicio>2020</dataInicio>
+            <dataTermino>2020</dataTermino>
+            <compositorProjeto>
+              <model.projetos.Projeto reference="../../../../.."/>
+            </compositorProjeto>
+            <aporteCusteioMensalReais>2000.0</aporteCusteioMensalReais>
+            <qtdMesesCusteados>8</qtdMesesCusteados>
+            <qtdMesesPagos>4</qtdMesesPagos>
+            <coordenador>false</coordenador>
+          </participacao>
+        </model.autenticacao.Membro>
+      </membros>
+    </model.projetos.Projeto>
+    <model.projetos.Projeto>
+      <id>2</id>
+      <nome>Teste2</nome>
+      <ativo>true</ativo>
+      <dataInicio>2020</dataInicio>
+      <dataTermino>2020</dataTermino>
+      <compositorProjeto/>
+      <aporteCusteioReais>2000.0</aporteCusteioReais>
+      <aporteCapitalReais>1200.0</aporteCapitalReais>
+      <gastoExecutadoCusteioReais>1000.0</gastoExecutadoCusteioReais>
+      <gastoExecutadoCapitalReais>1000.0</gastoExecutadoCapitalReais>
+      <membros>
+        <model.autenticacao.Membro>
+          <matricula>253253</matricula>
+          <nome>paulo</nome>
+          <ativo>true</ativo>
+          <email>paulo@gmail.com</email>
+          <administrador>true</administrador>
+          <contaEmail class="model.autenticacao.ContaEmailLivre">
+            <conta class="model.autenticacao.ContaAutenticacaoProvedorInterno"/>
+            <login>paulo@gmail.com</login>
+            <senha>paulo123</senha>
+          </contaEmail>
+          <participacao>
+            <id>2</id>
+            <nome>paulo</nome>
+            <ativo>true</ativo>
+            <dataInicio>2020</dataInicio>
+            <dataTermino>2020</dataTermino>
+            <compositorProjeto>
+              <model.projetos.Projeto>
+                <id>1</id>
+                <nome>Teste</nome>
+                <ativo>true</ativo>
+                <dataInicio>2020</dataInicio>
+                <dataTermino>2020</dataTermino>
+                <compositorProjeto/>
+                <aporteCusteioReais>1000.0</aporteCusteioReais>
+                <aporteCapitalReais>1000.0</aporteCapitalReais>
+                <gastoExecutadoCusteioReais>1000.0</gastoExecutadoCusteioReais>
+                <gastoExecutadoCapitalReais>1000.0</gastoExecutadoCapitalReais>
+                <membros/>
+              </model.projetos.Projeto>
+              <model.projetos.Projeto reference="../../../../.."/>
+            </compositorProjeto>
+            <aporteCusteioMensalReais>4000.0</aporteCusteioMensalReais>
+            <qtdMesesCusteados>12</qtdMesesCusteados>
+            <qtdMesesPagos>11</qtdMesesPagos>
+            <coordenador>true</coordenador>
+          </participacao>
+        </model.autenticacao.Membro>
+      </membros>
+    </model.projetos.Projeto>
+  </projetos>
+</persistenciaXML.DAOProjeto>

@@ -25,9 +25,9 @@ public class TelaAtualizarGrupo extends JFrame {
 	private ControllerGrupo controllerGrupo = new ControllerGrupo();
 	private ControllerMembro controllerMembro = new ControllerMembro();
 	
-	private JComboBox<String> listGrupos;
-	private JComboBox<String> listMembrosGrupo;
-	private JComboBox<String> listMembros;
+	private JComboBox<Integer> listGrupos;
+	private JComboBox<Long> listMembrosGrupo;
+	private JComboBox<Long> listMembros;
 	private JTextField txtNovoNome;
 	private JTextField txtDataTermino;
 	private JTextField txtLinkCNPq;
@@ -105,40 +105,42 @@ public class TelaAtualizarGrupo extends JFrame {
 
 	public void addComboBox() {
 		//Lista dos grupos
-		String[] gruposComboBox = new String[controllerGrupo.getGrupos().size()];
+		Integer[] gruposComboBox = new Integer[controllerGrupo.getGrupos().size()];
 		for (int i=0; i<controllerGrupo.getGrupos().size(); i++) {
-			gruposComboBox[i] = (controllerGrupo.getGrupos().get(i).getNome());
+			gruposComboBox[i] = (controllerGrupo.getGrupos().get(i).getId());
 		}
 		
-		listGrupos = new JComboBox<String>(gruposComboBox);
+		listGrupos = new JComboBox<Integer>(gruposComboBox);
 		listGrupos.setBackground(Color.gray);
 		listGrupos.setBounds(100, 110, 130, 30);
+		OuvinteComboBox ouvinteCombo = new OuvinteComboBox();
+		listGrupos.addActionListener(ouvinteCombo);
 		add(listGrupos);
 		
 		//Lista dos membros
-		String[] membrosComboBox = new String[controllerMembro.getMembros().size()];
+		Long[] membrosComboBox = new Long[controllerMembro.getMembros().size()];
 		for (int i=0; i<controllerMembro.getMembros().size(); i++) {
-			membrosComboBox[i] = controllerMembro.getMembros().get(i).getNome();
+			membrosComboBox[i] = controllerMembro.getMembros().get(i).getMatricula();
 		}
 
-		listMembros = new JComboBox<String>(membrosComboBox);
+		listMembros = new JComboBox<Long>(membrosComboBox);
 		listMembros.setBackground(Color.gray);
 		listMembros.setBounds(270, 250, 130, 30);
 		add(listMembros);
 		
 		
-		int index = listGrupos.getSelectedIndex();
+		int index = (Integer)listGrupos.getSelectedItem();
 		
 		//Lista dos membros que estão no grupo selecionado
-		String[] membrosGrupoComboBox = new String[controllerMembro.getMembros().size()];
+		Long[] membrosGrupoComboBox = new Long[controllerGrupo.pesquisarGrupo(index).getMembros().size()];
 		if(controllerGrupo.getGrupos().size() > 0) {
-			for (int i=0; i<controllerGrupo.getGrupos().get(index).getMembros().size(); i++) {
-				membrosGrupoComboBox[i] = controllerGrupo.getGrupos().get(index).getMembros().get(i).getNome();
+			for (int i=0; i<controllerGrupo.pesquisarGrupo(index).getMembros().size(); i++) {
+				membrosGrupoComboBox[i] = controllerGrupo.pesquisarGrupo(index).getMembros().get(i).getMatricula();
 			}
 		}
 		
 
-		listMembrosGrupo = new JComboBox<String>(membrosGrupoComboBox);
+		listMembrosGrupo = new JComboBox<Long>(membrosGrupoComboBox);
 		listMembrosGrupo.setBackground(Color.gray);
 		listMembrosGrupo.setBounds(100, 250, 130, 30);
 		add(listMembrosGrupo);
@@ -173,7 +175,33 @@ public class TelaAtualizarGrupo extends JFrame {
 		buttonFinalizar.addActionListener(ouvinteAtualizarGrupo);
 		
 	}
-	
+	public class OuvinteComboBox implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//Lista dos membros
+			Long[] membrosComboBox = new Long[controllerMembro.getMembros().size()];
+			for (int i=0; i<controllerMembro.getMembros().size(); i++) {
+				membrosComboBox[i] = controllerMembro.getMembros().get(i).getMatricula();
+			}
+			JComboBox<Long> comboM = new JComboBox<Long>(membrosComboBox);
+			listMembros.setModel(comboM.getModel());
+			
+			
+			int index = (Integer)listGrupos.getSelectedItem();
+			
+			//Lista dos membros que estão no grupo selecionado
+			Long[] membrosGrupoComboBox = new Long[controllerGrupo.pesquisarGrupo(index).getMembros().size()];
+			if(controllerGrupo.getGrupos().size() > 0) {
+				for (int i=0; i<controllerGrupo.pesquisarGrupo(index).getMembros().size(); i++) {
+					membrosGrupoComboBox[i] = controllerGrupo.pesquisarGrupo(index).getMembros().get(i).getMatricula();
+				}
+			}
+			JComboBox<Long> comboMG = new JComboBox<Long>(membrosGrupoComboBox);
+			listMembrosGrupo.setModel(comboMG.getModel());
+		}
+		
+	}
 	public class OuvinteAtualizarGrupo implements ActionListener {
 
 		@Override

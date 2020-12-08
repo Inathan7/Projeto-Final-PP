@@ -29,17 +29,12 @@ public class Fachada3Grupo {
 	 * @return: retorna true se remover o grupo da persistencia e false se nao.
 	 */
 	public boolean removerGrupo(int id) {
-		Grupo grupo = null;
 		try {
-			grupo = pesquisarGrupo(id);
+			grupoXML.remover(id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(grupo.getGrupos().size() > 0) {
-			return false;
-		}
-		grupoXML.remover(id);
 		return true;
 	}
 	/**

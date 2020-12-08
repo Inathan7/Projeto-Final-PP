@@ -30,7 +30,6 @@ public class TelaAdicionarGrupo extends JFrame {
 	private JComboBox<Integer> listProjetos;
 
 
-	private ControllerMembro controllerMembro = new ControllerMembro();
 	private ControllerProjeto controllerProjeto = new ControllerProjeto();
 
 	private ControllerGrupo controllerGrupo = new ControllerGrupo();
@@ -195,15 +194,11 @@ public class TelaAdicionarGrupo extends JFrame {
 			case "Add":
 				int id = (Integer) listProjetos.getSelectedItem();
 
-				controllerGrupo.addProjetoAoGrupo(controllerGrupo.getGrupos().get(controllerGrupo.getGrupos().size()-1), controllerProjeto.pesquisarProjeto(id));
-				for (int i = 0; i < controllerProjeto.getProjetos().size(); i++) {
-					for (int j = 0; j <controllerProjeto.getProjetos().get(i).getMembros().size(); j++) {
-						controllerGrupo.addMembroAogrupo(controllerProjeto.getProjetos().get(i).getMembros().get(j), controllerGrupo.getGrupos().size());
-						JOptionPane.showMessageDialog(null, "Membros do Projeto Adicionados ao Grupo!");
+				controllerGrupo.addProjetoAoGrupo(controllerGrupo.pesquisarGrupo(controllerGrupo.getGrupos().size()-1), controllerProjeto.pesquisarProjeto(id));
+				for (int i = 0; i < controllerProjeto.pesquisarProjeto(id).getMembros().size(); i++) {
+						controllerGrupo.addMembroAogrupo(controllerProjeto.pesquisarProjeto(id).getMembros().get(i), controllerGrupo.getGrupos().size());
 					}
-				}
-				
-
+				JOptionPane.showMessageDialog(null, "Membros do Projeto Adicionados ao Grupo!");
 				break;
 
 			case "Voltar":
@@ -213,8 +208,5 @@ public class TelaAdicionarGrupo extends JFrame {
 			}	
 
 		}
-
 	}
-
-
 }

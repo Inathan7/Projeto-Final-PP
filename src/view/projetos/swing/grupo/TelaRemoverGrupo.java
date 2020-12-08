@@ -22,7 +22,7 @@ public class TelaRemoverGrupo extends JFrame {
 	
 	private ControllerGrupo controllerGrupo = new ControllerGrupo();
 	
-	private JComboBox<String> listGrupos;
+	private JComboBox<Integer> listGrupos;
 	
 	public TelaRemoverGrupo() {
 		setTitle("Remover Grupo");
@@ -55,12 +55,12 @@ public class TelaRemoverGrupo extends JFrame {
 	}
 
 	private void addJComboBox() {
-		String[] gruposComboBox = new String[controllerGrupo.getGrupos().size()];
+		Integer[] gruposComboBox = new Integer[controllerGrupo.getGrupos().size()];
 		for (int i=0; i<controllerGrupo.getGrupos().size(); i++) {
-			gruposComboBox[i] = (controllerGrupo.getGrupos().get(i).getNome());
+			gruposComboBox[i] = (controllerGrupo.getGrupos().get(i).getId());
 		}
 		
-		listGrupos = new JComboBox<String>(gruposComboBox);
+		listGrupos = new JComboBox<Integer>(gruposComboBox);
 		listGrupos.setBackground(Color.gray);
 		listGrupos.setBounds(120, 110, 120, 30);
 		add(listGrupos);
@@ -92,16 +92,15 @@ public class TelaRemoverGrupo extends JFrame {
 			switch (evento) {
 			
 			case "Remover":
-				int index = listGrupos.getSelectedIndex();
-				
-				for (int i = 0; i < controllerGrupo.getGrupos().size(); i++) {
-					if(controllerGrupo.getGrupos().get(i).equals(controllerGrupo.getGrupos().get(index))) {
-						controllerGrupo.removerGrupo(index);
-						JOptionPane.showMessageDialog(null, "Grupo Removido");
-						listGrupos.repaint();
-					}
+				int index = (Integer)listGrupos.getSelectedItem();
+				controllerGrupo.removerGrupo(index);
+				JOptionPane.showMessageDialog(null, "Grupo Removido");
+				Integer[] gruposComboBox = new Integer[controllerGrupo.getGrupos().size()];
+				for (int i=0; i<controllerGrupo.getGrupos().size(); i++) {
+					gruposComboBox[i] = (controllerGrupo.getGrupos().get(i).getId());
 				}
-				
+				JComboBox<Integer> comboG = new JComboBox<Integer>(gruposComboBox);
+				listGrupos.setModel(comboG.getModel());
 				break;
 
 			case "Finalizar":
