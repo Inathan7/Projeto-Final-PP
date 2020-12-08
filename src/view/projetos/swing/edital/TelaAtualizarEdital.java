@@ -131,7 +131,7 @@ public class TelaAtualizarEdital extends JFrame {
 					if(controllerEdital.getEditais().get(i).equals(controllerEdital.getEditais().get(index))) {
 						controllerEdital.setAtributosEdital(controllerEdital.getEditais().get(index),nome, dataTermino);
 						controllerEdital.atualizarEdital();
-						JOptionPane.showMessageDialog(null, "Grupo Atualizado");
+						JOptionPane.showMessageDialog(null, "Edital Atualizado");
 						listEditais.repaint();
 					}
 				}
