@@ -229,18 +229,26 @@ public class TelaPontoSwing extends JFrame implements TelaPonto {
 					mostrarMensagem("Não há ninguém cadastrado");
 					
 				}
-				Integer[] projetosComboBoxAtualizado = new Integer[controllerMembro.getMembros().size()];
-				for(int i = 0; i<controllerProjeto.getProjetos().size(); i++) {
-					if(controllerProjeto.getProjetos().get(i).getMembros().size() != 0 ) {
-						for (int j = 0; j < controllerProjeto.getProjetos().get(i).getMembros().size(); j++) {
-							if(Fachada9MembroRealizarLogout.isOnline(controllerProjeto.getProjetos().get(i).getMembros().get(j).getLogin())) {
-								if(controllerProjeto.getProjetos().get(i).getMembros().get(j).getLogin().equals(textLogin.getText())){
-									projetosComboBoxAtualizado[i] =  controllerProjeto.getProjetos().get(i).getId();
-								}
+				
+				Integer[] projetosComboBoxAtualizado = null;
+				
+				for (int i = 0; i<controllerMembro.getMembros().size(); i++) {
+					if(controllerMembro.getMembros().get(i).getLogin().equals(textLogin.getText()) && controllerMembro.getMembros().get(i).getSenha().equals(textSenha.getText())) {
+						projetosComboBoxAtualizado = new Integer[controllerMembro.getMembros().get(i).getParticipacao().getCompositorProjeto().size()];
+						for(int j = 0; j<controllerMembro.getMembros().get(i).getParticipacao().getCompositorProjeto().size(); j++) {
+							if(controllerMembro.getMembros().get(i).getParticipacao().getCompositorProjeto().size() != 0 ) {
+									if(Fachada9MembroRealizarLogout.isOnline(controllerMembro.getMembros().get(i).getLogin())) {
+										if(controllerMembro.getMembros().get(i).getLogin().equals(textLogin.getText())){
+											projetosComboBoxAtualizado[i] =  controllerMembro.getMembros().get(i).getParticipacao().getCompositorProjeto().get(j).getId();
+										}
+									}
+								
 							}
 						}
 					}
 				}
+				
+				
 				JComboBox combo = new JComboBox<Integer>(projetosComboBoxAtualizado);
 				listComboBox.setModel(combo.getModel());
 				break;
@@ -259,12 +267,15 @@ public class TelaPontoSwing extends JFrame implements TelaPonto {
 
 			case "Ver Detalhes":
 				Integer id = (Integer)listComboBox.getSelectedItem();
-				mostrarMensagem("Horas Trabalhadas: " + 
-						fachadaHorario.horasTrabalhadas(controllerProjeto.pesquisarProjeto(id).getDataInicio(), controllerProjeto.pesquisarProjeto(id).getDataTermino(), textLogin.getText())
-				+ "\nDéficit Horas: " + 
-				controllerTelaPonto.deficitHoras(controllerProjeto.pesquisarProjeto(id).getDataInicio(), controllerProjeto.pesquisarProjeto(id).getDataTermino(), textLogin.getText())
-				+ "\nPontos Inválidos: " +
-				controllerTelaPonto.pontosInvalidos(textLogin.getText()));
+//				mostrarMensagem("Horas Trabalhadas: " + 
+//						fachadaHorario.horasTrabalhadas(controllerProjeto.pesquisarProjeto(id).getDataInicio(), controllerProjeto.pesquisarProjeto(id).getDataTermino(), textLogin.getText())
+//				+ "\nDéficit Horas: " + 
+//				controllerTelaPonto.deficitHoras(controllerProjeto.pesquisarProjeto(id).getDataInicio(), controllerProjeto.pesquisarProjeto(id).getDataTermino(), textLogin.getText())
+//				+ "\nPontos Inválidos: " +
+//				controllerTelaPonto.pontosInvalidos(textLogin.getText()));
+				
+				mostrarMensagem(controllerProjeto.pesquisarProjeto(id).getAporteCapitalReais()+"\n"+
+						controllerProjeto.pesquisarProjeto(id).getAporteCusteioReais());
 
 
 				break;

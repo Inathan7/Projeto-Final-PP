@@ -78,6 +78,12 @@
         <qtdMesesCusteados>8</qtdMesesCusteados>
         <qtdMesesPagos>4</qtdMesesPagos>
         <coordenador>true</coordenador>
+        <ponto>
+          <dataHoraEntrada>18</dataHoraEntrada>
+          <dataHoraSaida>26</dataHoraSaida>
+          <justificativaAceita>false</justificativaAceita>
+          <participacao reference="../.."/>
+        </ponto>
       </participacao>
     </model.autenticacao.Membro>
   </membros>
