@@ -21,13 +21,13 @@ public class Fachada8Relatorio {
 	/**
 	 * Esse é construtor que inicializa os atributos
 	 */
-	public Fachada8Relatorio() {
-		Fachada4Edital fachada = new Fachada4Edital();
-		Fachada3Grupo fachadaGrupo = new Fachada3Grupo();
-		this.editais = fachada.getEditais();
-		this.grupos = fachadaGrupo.getGrupos();
-		this.projetos = Fachada5Projeto.getProjetosPersistidos();
-	}
+//	public Fachada8Relatorio() {
+//		Fachada4Edital fachada = new Fachada4Edital();
+//		Fachada3Grupo fachadaGrupo = new Fachada3Grupo();
+//		this.editais = fachada.getEditais();
+//		this.grupos = fachadaGrupo.getGrupos();
+//		this.projetos = Fachada5Projeto.getProjetosPersistidos();
+//	}
 	/**
 	 * Esse método gera o relatório de todos os editais
 	 *

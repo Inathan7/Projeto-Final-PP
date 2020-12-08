@@ -14,11 +14,6 @@ import javax.swing.text.html.HTML;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 
-import fachadas.Fachada8Relatorio;
-import model.projetos.Edital;
-import model.projetos.Grupo;
-import model.projetos.Projeto;
-
 public class RelatorioProjetoSwing extends JFrame implements MontadorRelatorioProjeto {
 	
 	
@@ -33,15 +28,14 @@ public class RelatorioProjetoSwing extends JFrame implements MontadorRelatorioPr
 		return swing;
 	}
 
-	@Override
-	public void gerarRelatorio() {
+//	@Override
+//	public void gerarRelatorio() {
+//
+//		Fachada8Relatorio fachada = new Fachada8Relatorio();
+//		relatorio = fachada.gerarRelatorioGeral();
+//		
+//	}
 
-		Fachada8Relatorio fachada = new Fachada8Relatorio();
-		relatorio = fachada.gerarRelatorioGeral();
-		
-	}
-
-	@Override
 	public void contruirInterface() {
 		HTMLEditorKit htmlEdKit = new HTMLEditorKit();
 		HTMLDocument htmlDoc = (HTMLDocument) htmlEdKit.createDefaultDocument();
@@ -77,20 +71,20 @@ public class RelatorioProjetoSwing extends JFrame implements MontadorRelatorioPr
 	//Nova versão
 
 	@Override
-	public void gerar(Edital edital) {
-		// TODO Auto-generated method stub
+	public String gerarRelatorioEdital() {
+		return "";
 		
 	}
 
 	@Override
-	public void gerar(Grupo grupo) {
-		// TODO Auto-generated method stub
+	public String gerarRelatorioGrupo() {
+		return "";
 		
 	}
 
 	@Override
-	public void gerar(Projeto projeto) {
-		// TODO Auto-generated method stub
+	public String gerarRelatorioProjeto() {
+		return "";
 		
 	}
 

@@ -6,16 +6,16 @@ import model.projetos.Projeto;
 
 public interface MontadorRelatorioProjeto {
 	
-	public void gerarRelatorio();
-
-	public void contruirInterface();
+//	public void gerarRelatorio();
+//
+//	public void contruirInterface();
 	
 	// Nova Versão
 	
-	public void gerar(Edital edital);
+	public String gerarRelatorioEdital();
 	
-	public void gerar(Grupo grupo);
+	public String gerarRelatorioGrupo();
 	
-	public void gerar(Projeto projeto);
+	public String gerarRelatorioProjeto();
 	
 }
