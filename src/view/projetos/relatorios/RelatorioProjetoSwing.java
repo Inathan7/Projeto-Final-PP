@@ -3,6 +3,7 @@ package view.projetos.relatorios;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JEditorPane;
@@ -25,9 +26,8 @@ public class RelatorioProjetoSwing extends JFrame implements MontadorRelatorioPr
 	
 	private String relatorio;
 	
-	Fachada4Edital fachadaEdital = new Fachada4Edital();
-	Fachada3Grupo fachadaGrupo = new Fachada3Grupo();
-
+	//TODO Retirar Fachadas
+	//Retirar códigos HTML
 	
 	public SwingJPanel getProduto() {
 		SwingJPanel swing = new SwingJPanel();
@@ -36,28 +36,28 @@ public class RelatorioProjetoSwing extends JFrame implements MontadorRelatorioPr
 	}
 
 	@Override
-	public void contruirInterface(String relatorio) {
-		HTMLEditorKit htmlEdKit = new HTMLEditorKit();
-		HTMLDocument htmlDoc = (HTMLDocument) htmlEdKit.createDefaultDocument();
-		HTML html = new HTML();
-		
-		try{
-			htmlEdKit.insertHTML(htmlDoc,0,toString(),0,0,html.getTag("html"));
-		}
-		catch(IOException ioe){
-			JOptionPane.showMessageDialog(null,"Exception: ioe");
-		}
-		catch(BadLocationException ble){
-			JOptionPane.showMessageDialog(null,"Exception: ble");
-		};
+	public void construirInterface() {
+//		HTMLEditorKit htmlEdKit = new HTMLEditorKit();
+//		HTMLDocument htmlDoc = (HTMLDocument) htmlEdKit.createDefaultDocument();
+//		HTML html = new HTML();
+//		
+//		try{
+//			htmlEdKit.insertHTML(htmlDoc,0,toString(),0,0,html.getTag("html"));
+//		}
+//		catch(IOException ioe){
+//			JOptionPane.showMessageDialog(null,"Exception: ioe");
+//		}
+//		catch(BadLocationException ble){
+//			JOptionPane.showMessageDialog(null,"Exception: ble");
+//		};
 		
 		JEditorPane edPane = new JEditorPane();
 		edPane.setBorder(BorderFactory.createLineBorder(Color.yellow));
-		edPane.setContentType("text/html");
+//		edPane.setContentType("text/html");
 		edPane.setEditable(false);
-		edPane.setEditorKit(htmlEdKit);
-		edPane.setDocument(htmlDoc);
-		htmlEdKit.install(edPane);
+//		edPane.setEditorKit(htmlEdKit);
+//		edPane.setDocument(htmlDoc);
+//		htmlEdKit.install(edPane);
 		edPane.setText(relatorio);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,57 +67,46 @@ public class RelatorioProjetoSwing extends JFrame implements MontadorRelatorioPr
 		this.setLocation(0,0);
 		
 	}
-	
-	//Nova versão
 
 	@Override
-	public String gerarRelatorioEdital() {
-		//Usa tags HTML
-		relatorio += "<body Style='text-align: center'>";
-		for(Edital edital : fachadaEdital.getEditais()){
-			relatorio += "<h3 Style='text-align: center; font: 21px verdana;'>[Edital ID: "+edital.getId()+"]</h3>";
-			relatorio += "[NOME] - "+edital.getNome()+"<br>";
-			relatorio += "[DATA INICIO] - "+edital.getDataInicio()+"<br>";
-			relatorio += "[DATA TERMINO] - "+edital.getDataTermino()+"<br>";
-			relatorio += "[CUSTO TOTAL] - "+edital.getCustoTotal()+"<br>";
-			relatorio += "[CAPITAL NÃO GASTO] - "+edital.getCapitalReaisNaoGastoTotal()+"<br>";
-			relatorio += "[CUSTEIO NÃO GASTO] - "+edital.getCusteioReaisNaoGastoTotal()+"<br>";
-			relatorio +="[EDITAL ATIVO] - "+edital.getAtivo()+"<br>";
-			relatorio += "</body>";
+	public String gerarRelatorioEdital(ArrayList<Edital> editais) {
+		for(Edital edital : editais){
+			relatorio += "[Edital ID: "+edital.getId()+"\n";
+			relatorio += "[NOME] - "+edital.getNome()+"\n";
+			relatorio += "[DATA INICIO] - "+edital.getDataInicio()+"\n";
+			relatorio += "[DATA TERMINO] - "+edital.getDataTermino()+"\n";
+			relatorio += "[CUSTO TOTAL] - "+edital.getCustoTotal()+"\n";
+			relatorio += "[CAPITAL NÃO GASTO] - "+edital.getCapitalReaisNaoGastoTotal()+"\n";
+			relatorio += "[CUSTEIO NÃO GASTO] - "+edital.getCusteioReaisNaoGastoTotal()+"\n";
+			relatorio +="[EDITAL ATIVO] - "+edital.getAtivo()+"\n";
 		}
 		return relatorio;
 		
 	}
 
 	@Override
-	public String gerarRelatorioGrupo() {
-		//Usa tags HTML
-		relatorio += "<body Style='text-align: center'>";
-		for(Grupo grupo : fachadaGrupo.getGrupos()){
-			relatorio += "<h3 Style='text-align: center; font: 21px verdana;'>[Grupo ID: "+grupo.getId()+"]</h3>";
-			relatorio += "[LINK CNPq] - "+grupo.getLinkCNPq()+"<br/>";
-			relatorio += "[DATA CRIAÇÂO] - "+grupo.getDataCriacao()+"<br/>";
-			relatorio += "[GRUPO ATIVO] - "+grupo.getAtivo()+"<br/>";
-			relatorio += "</body>";
+	public String gerarRelatorioGrupo(ArrayList<Grupo> grupos) {
+		for(Grupo grupo : grupos){
+			relatorio += "[Grupo ID: "+grupo.getId()+"\n";
+			relatorio += "[LINK CNPq] - "+grupo.getLinkCNPq()+"\n";
+			relatorio += "[DATA CRIAÇÂO] - "+grupo.getDataCriacao()+"\n";
+			relatorio += "[GRUPO ATIVO] - "+grupo.getAtivo()+"\n";
 		}
 		return relatorio;
 	}
 
 	@Override
-	public String gerarRelatorioProjeto() {
-		//Usa tags HTML
-		relatorio += "<body Style='text-align: center'>";
-		for(Projeto p: Fachada5Projeto.getProjetosPersistidos()){
-			relatorio += "<h3 Style='text-align: center; font: 21px verdana;'>[Projeto ID: "+p.getId()+"]</h3>";
-			relatorio += "Nome do projeto: "+p.getNome()+"<br/>";
-			relatorio += "Gastos executados capital: "+p.getGastoExecutadoCapitalReais()+"<br/>";
-			relatorio += "Gastos executados custeio: "+p.getGastoExecutadoCusteioReais()+"<br/>";
-			relatorio += "Aporte capital: "+p.getAporteCapitalReais()+"<br/>";
-			relatorio += "Aporte custeio: "+p.getAporteCusteioReais()+"<br/>";
-			relatorio += "Data inicio: "+p.getDataInicio()+"<br/>";
-			relatorio += "Data termino: "+p.getDataTermino()+"<br/>";
-			relatorio += "Custo Total: "+p.getCustoTotal()+"<br/>";
-			relatorio += "</body>";
+	public String gerarRelatorioProjeto(ArrayList<Projeto> projetos) {
+		for(Projeto p: projetos){
+			relatorio += "[Projeto ID: "+p.getId()+"\n";
+			relatorio += "Nome do projeto: "+p.getNome()+"\n";
+			relatorio += "Gastos executados capital: "+p.getGastoExecutadoCapitalReais()+"\n";
+			relatorio += "Gastos executados custeio: "+p.getGastoExecutadoCusteioReais()+"\n";
+			relatorio += "Aporte capital: "+p.getAporteCapitalReais()+"\n";
+			relatorio += "Aporte custeio: "+p.getAporteCusteioReais()+"\n";
+			relatorio += "Data inicio: "+p.getDataInicio()+"\n";
+			relatorio += "Data termino: "+p.getDataTermino()+"\n";
+			relatorio += "Custo Total: "+p.getCustoTotal()+"\n";
 		}
 		return relatorio;
 		

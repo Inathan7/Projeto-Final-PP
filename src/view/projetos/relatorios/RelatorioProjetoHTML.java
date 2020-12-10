@@ -3,6 +3,7 @@ package view.projetos.relatorios;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import fachadas.Fachada3Grupo;
 import fachadas.Fachada4Edital;
@@ -15,8 +16,7 @@ public class RelatorioProjetoHTML extends File implements MontadorRelatorioProje
 
 	private String relatorio;
 	
-	Fachada4Edital fachadaEdital = new Fachada4Edital();
-	Fachada3Grupo fachadaGrupo = new Fachada3Grupo();
+	//TODO Retirar Fachadas
 	
 
 	public RelatorioProjetoHTML(File arquivo, String caminho) {
@@ -35,7 +35,7 @@ public class RelatorioProjetoHTML extends File implements MontadorRelatorioProje
 	}
 
 	@Override
-	public void contruirInterface(String relatorio) {
+	public void construirInterface() {
 		try {
 			FileWriter fw = new FileWriter(this);
 			fw.write(relatorio);
@@ -50,10 +50,10 @@ public class RelatorioProjetoHTML extends File implements MontadorRelatorioProje
 //Nova Versão
 
 	@Override
-	public String gerarRelatorioEdital() {
+	public String gerarRelatorioEdital(ArrayList<Edital> editais) {
 		//Usa tags HTML
 				relatorio += "<body Style='text-align: center'>";
-				for(Edital edital : fachadaEdital.getEditais()){
+				for(Edital edital : editais){
 					relatorio += "<h3 Style='text-align: center; font: 21px verdana;'>[Edital ID: "+edital.getId()+"]</h3>";
 					relatorio += "[NOME] - "+edital.getNome()+"<br>";
 					relatorio += "[DATA INICIO] - "+edital.getDataInicio()+"<br>";
@@ -70,10 +70,10 @@ public class RelatorioProjetoHTML extends File implements MontadorRelatorioProje
 
 
 	@Override
-	public String gerarRelatorioGrupo() {
+	public String gerarRelatorioGrupo(ArrayList<Grupo> grupos) {
 		//Usa tags HTML
 				relatorio += "<body Style='text-align: center'>";
-				for(Grupo grupo : fachadaGrupo.getGrupos()){
+				for(Grupo grupo : grupos){
 					relatorio += "<h3 Style='text-align: center; font: 21px verdana;'>[Grupo ID: "+grupo.getId()+"]</h3>";
 					relatorio += "[LINK CNPq] - "+grupo.getLinkCNPq()+"<br>";
 					relatorio += "[DATA CRIAÇÂO] - "+grupo.getDataCriacao()+"<br>";
@@ -87,10 +87,10 @@ public class RelatorioProjetoHTML extends File implements MontadorRelatorioProje
 
 
 	@Override
-	public String gerarRelatorioProjeto() {
+	public String gerarRelatorioProjeto(ArrayList<Projeto> projetos) {
 		//Usa tags HTML
 				relatorio += "<body Style='text-align: center'>";
-				for(Projeto p: Fachada5Projeto.getProjetosPersistidos()){
+				for(Projeto p: projetos){
 					relatorio += "<h3 Style='text-align: center; font: 21px verdana;'>[Projeto ID: "+p.getId()+"]</h3>";
 					relatorio += "Nome do projeto: "+p.getNome()+"<br>";
 					relatorio += "Gastos executados capital: "+p.getGastoExecutadoCapitalReais()+"<br>";

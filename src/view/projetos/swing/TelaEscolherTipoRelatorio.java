@@ -69,13 +69,13 @@ public class TelaEscolherTipoRelatorio extends JFrame {
 			case "Gerar Relatório Swing":
 				dispose();
 				//Logica gerar Relatorio Swing
-				fachadaRelatorio.relatorioSwing();
+	//			fachadaRelatorio.relatorioSwing();
 				break;
 
 			case "Gerar Relatório HTML":
 				dispose();
 			//Logica gerar Relatorio HTML
-				fachadaRelatorio.relatorioHTML();
+	//			fachadaRelatorio.relatorioHTML();
 				break;
 				
 			case "":
