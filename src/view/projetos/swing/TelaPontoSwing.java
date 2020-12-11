@@ -193,13 +193,6 @@ public class TelaPontoSwing extends JFrame implements TelaPonto {
 
 			case "Ver Detalhes":
 				Integer id = (Integer)listComboBox.getSelectedItem();
-//				mostrarMensagem("Horas Trabalhadas: " + 
-//						fachadaHorario.horasTrabalhadas(controllerProjeto.pesquisarProjeto(id).getDataInicio(), controllerProjeto.pesquisarProjeto(id).getDataTermino(), textLogin.getText())
-//				+ "\nDéficit Horas: " + 
-//				controllerTelaPonto.deficitHoras(controllerProjeto.pesquisarProjeto(id).getDataInicio(), controllerProjeto.pesquisarProjeto(id).getDataTermino(), textLogin.getText())
-//				+ "\nPontos Inválidos: " +
-//				controllerTelaPonto.pontosInvalidos(textLogin.getText()));
-				
 				mostrarMensagem(controllerProjeto.pesquisarProjeto(id).getAporteCapitalReais()+"\n"+
 						controllerProjeto.pesquisarProjeto(id).getAporteCusteioReais());
 
