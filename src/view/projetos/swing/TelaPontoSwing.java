@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 
 import javax.swing.ButtonGroup;
-import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -16,22 +15,15 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.event.ListDataListener;
 
 import org.apache.commons.mail.EmailException;
 
 import controller.ControllerMembro;
 import controller.ControllerProjeto;
 import controller.ControllerTelaPonto;
-import fachadas.Fachada11BaterPonto;
-import fachadas.Fachada13Horario;
 import fachadas.Fachada1Membro;
-import fachadas.Fachada2Autenticacao;
-import fachadas.Fachada5Projeto;
 import fachadas.Fachada9MembroRealizarLogout;
-import model.autenticacao.Membro;
 import model.autenticacao.TipoProvedorAutenticacao;
-import model.projetos.Projeto;
 import view.autenticacao.FabricaTela;
 import view.autenticacao.swing.FabricaTelaSwing;
 import view.projetos.TelaPonto;
@@ -42,14 +34,11 @@ public class TelaPontoSwing extends JFrame implements TelaPonto {
 
 	private FabricaTela fabricaTela = new FabricaTelaSwing();
 
-	private Fachada13Horario fachadaHorario = new Fachada13Horario();
-	private Fachada2Autenticacao fachadaAutenticacao = new Fachada2Autenticacao();
-	private Fachada11BaterPonto fachadaBaterPonto = new Fachada11BaterPonto();
-
 	private OuvinteBaterPonto ouvinteBaterPonto = new OuvinteBaterPonto();
 
 	private ControllerProjeto controllerProjeto = new ControllerProjeto();
 	private ControllerMembro controllerMembro = new ControllerMembro();
+	private ControllerTelaPonto controllerTelaPonto = new ControllerTelaPonto();
 
 	private JComboBox<Integer> listComboBox;
 	private JTextField textLogin;
@@ -193,76 +182,14 @@ public class TelaPontoSwing extends JFrame implements TelaPonto {
 
 			String evento = e.getActionCommand();
 
-			ControllerTelaPonto controllerTelaPonto = new ControllerTelaPonto();
-
 			switch (evento) {
 
 			case "Logar":
-
-				TipoProvedorAutenticacao provedor;
-
-				if (provedorInterno.isSelected()) {
-					provedor = TipoProvedorAutenticacao.INTERNO;
-				}else {
-					provedor = TipoProvedorAutenticacao.EMAIL_SMTP;
-				}
-
-				if(controllerMembro.getMembros().size() > 0) {
-					for (int i = 0; i<controllerMembro.getMembros().size(); i++) {
-						if(controllerMembro.getMembros().get(i).getLogin().equals(textLogin.getText()) && controllerMembro.getMembros().get(i).getSenha().equals(textSenha.getText())) {
-							Fachada9MembroRealizarLogout.realizarLogin(controllerMembro.getMembros().get(i));
-							try {
-								fachadaAutenticacao.autenticarContaEmailProvedor(textLogin.getText(), textSenha.getText(), provedor);
-							} catch (EmailException e1) {
-								mostrarMensagem("Login ou senha não existe no provedor SMTP");
-							}
-							JOptionPane.showMessageDialog(null, "Logado");
-							listComboBox.repaint();
-							btBaterPonto.setEnabled(true);
-							break;
-						} else{
-							mostrarMensagem("Login não cadastrado");
-
-						}
-					}
-				} else {
-					mostrarMensagem("Não há ninguém cadastrado");
-					
-				}
-				
-				Integer[] projetosComboBoxAtualizado = null;
-				
-				for (int i = 0; i<controllerMembro.getMembros().size(); i++) {
-					if(controllerMembro.getMembros().get(i).getLogin().equals(textLogin.getText()) && controllerMembro.getMembros().get(i).getSenha().equals(textSenha.getText())) {
-						projetosComboBoxAtualizado = new Integer[controllerMembro.getMembros().get(i).getParticipacao().getCompositorProjeto().size()];
-						for(int j = 0; j<controllerMembro.getMembros().get(i).getParticipacao().getCompositorProjeto().size(); j++) {
-							if(controllerMembro.getMembros().get(i).getParticipacao().getCompositorProjeto().size() != 0 ) {
-									if(Fachada9MembroRealizarLogout.isOnline(controllerMembro.getMembros().get(i).getLogin())) {
-										if(controllerMembro.getMembros().get(i).getLogin().equals(textLogin.getText())){
-											projetosComboBoxAtualizado[i] =  controllerMembro.getMembros().get(i).getParticipacao().getCompositorProjeto().get(j).getId();
-										}
-									}
-								
-							}
-						}
-					}
-				}
-				
-				
-				JComboBox combo = new JComboBox<Integer>(projetosComboBoxAtualizado);
-				listComboBox.setModel(combo.getModel());
+				logar();
 				break;
 
 			case "Bater Ponto":
-				Integer idProjeto = (Integer)listComboBox.getSelectedItem();
-				for(int i = 0; i < controllerMembro.getMembros().size(); i++){
-					if(controllerMembro.getMembros().get(i).getLogin().equals(textLogin.getText())){
-						LocalDateTime localTime = LocalDateTime.now();
-						fachadaBaterPonto.baterPonto(controllerMembro.getMembros().get(i).getParticipacao(),localTime.getHour(),localTime.getHour()+8);
-						fachadaBaterPonto.registrarPonto(controllerProjeto.pesquisarProjeto(idProjeto), textLogin.getText());
-						break;
-					}
-				}
+				baterPonto();
 				break;
 
 			case "Ver Detalhes":
@@ -302,5 +229,78 @@ public class TelaPontoSwing extends JFrame implements TelaPonto {
 	@Override
 	public void mostrarMensagem(String mensagem) {
 		JOptionPane.showMessageDialog(null, mensagem);
+	}
+
+	@Override
+	public void logar() {
+		TipoProvedorAutenticacao provedor;
+
+		if (provedorInterno.isSelected()) {
+			provedor = TipoProvedorAutenticacao.INTERNO;
+		}else {
+			provedor = TipoProvedorAutenticacao.EMAIL_SMTP;
+		}
+
+		if(controllerMembro.getMembros().size() > 0) {
+			for (int i = 0; i<controllerMembro.getMembros().size(); i++) {
+				if(controllerMembro.getMembros().get(i).getLogin().equals(textLogin.getText()) && controllerMembro.getMembros().get(i).getSenha().equals(textSenha.getText())) {
+					Fachada9MembroRealizarLogout.realizarLogin(controllerMembro.getMembros().get(i));
+					try {
+						controllerTelaPonto.autenticarContaEmailProvedor(textLogin.getText(), textSenha.getText(), provedor);
+					//	fachadaAutenticacao.autenticarContaEmailProvedor(textLogin.getText(), textSenha.getText(), provedor);
+					} catch (EmailException e1) {
+						mostrarMensagem("Login ou senha não existe no provedor SMTP");
+					}
+					JOptionPane.showMessageDialog(null, "Logado");
+					listComboBox.repaint();
+					btBaterPonto.setEnabled(true);
+					break;
+				} else{
+					mostrarMensagem("Login não cadastrado");
+
+				}
+			}
+		} else {
+			mostrarMensagem("Não há ninguém cadastrado");
+			
+		}
+		
+		Integer[] projetosComboBoxAtualizado = null;
+		
+		for (int i = 0; i<controllerMembro.getMembros().size(); i++) {
+			if(controllerMembro.getMembros().get(i).getLogin().equals(textLogin.getText()) && controllerMembro.getMembros().get(i).getSenha().equals(textSenha.getText())) {
+				projetosComboBoxAtualizado = new Integer[controllerMembro.getMembros().get(i).getParticipacao().getCompositorProjeto().size()];
+				for(int j = 0; j<controllerMembro.getMembros().get(i).getParticipacao().getCompositorProjeto().size(); j++) {
+					if(controllerMembro.getMembros().get(i).getParticipacao().getCompositorProjeto().size() != 0 ) {
+							if(Fachada9MembroRealizarLogout.isOnline(controllerMembro.getMembros().get(i).getLogin())) {
+								if(controllerMembro.getMembros().get(i).getLogin().equals(textLogin.getText())){
+									projetosComboBoxAtualizado[i] =  controllerMembro.getMembros().get(i).getParticipacao().getCompositorProjeto().get(j).getId();
+								}
+							}
+						
+					}
+				}
+			}
+		}
+		
+		
+		JComboBox combo = new JComboBox<Integer>(projetosComboBoxAtualizado);
+		listComboBox.setModel(combo.getModel());
+		
+	}
+
+	@Override
+	public void baterPonto() {
+		Integer idProjeto = (Integer)listComboBox.getSelectedItem();
+		for(int i = 0; i < controllerMembro.getMembros().size(); i++){
+			if(controllerMembro.getMembros().get(i).getLogin().equals(textLogin.getText())){
+				LocalDateTime localTime = LocalDateTime.now();
+			//	fachadaBaterPonto.baterPonto(controllerMembro.getMembros().get(i).getParticipacao(),localTime.getHour(),localTime.getHour()+8);
+				controllerTelaPonto.baterPonto(controllerMembro.getMembros().get(i).getParticipacao(),localTime.getHour(),localTime.getHour()+8);
+			//	fachadaBaterPonto.registrarPonto(controllerProjeto.pesquisarProjeto(idProjeto), textLogin.getText());
+				controllerTelaPonto.registrarPonto(controllerProjeto.pesquisarProjeto(idProjeto), textLogin.getText());
+				break;
+			}
+		}
 	}
 }

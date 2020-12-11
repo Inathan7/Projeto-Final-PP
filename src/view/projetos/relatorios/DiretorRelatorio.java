@@ -30,6 +30,18 @@ public class DiretorRelatorio {
 		montador.gerarRelatorioProjeto(projetos);
 	}
 	
+	public void gerarRelatorioParcialGrupo() {
+		
+	}
+	
+	public void gerarRelatorioParcialEdital() {
+		
+	}
+	
+	public void gerarRelatorioParcialProjeto() {
+		
+	}
+	
 	public void construirInterface() {
 		montador.construirInterface();
 	}
