@@ -10,10 +10,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
-import fachadas.Fachada8Relatorio;
+import controller.ControllerRelatorio;
 import view.autenticacao.FabricaTela;
 import view.autenticacao.swing.FabricaTelaSwing;
 import view.autenticacao.swing.SetLookAndFeel;
@@ -21,7 +20,8 @@ import view.autenticacao.swing.SetLookAndFeel;
 public class TelaEscolherTipoRelatorio extends JFrame {
 	
 	private FabricaTela fabricaTela = new FabricaTelaSwing();
-	private Fachada8Relatorio fachadaRelatorio = new Fachada8Relatorio();
+	private ControllerRelatorio controllerRelatorio = new ControllerRelatorio();
+	
 	
 	private JRadioButton relatorioHTML;
 	private JRadioButton relatorioSwing;
@@ -105,26 +105,40 @@ public class TelaEscolherTipoRelatorio extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			String evento = e.getActionCommand();
 			
+		if(evento.equals("")) {
+			dispose();
+			fabricaTela.fabricarTelaPrincipal();
+		}
+			
+		if(relatorioHTML.isSelected()) {
 			switch (evento) {
-			case "Gerar Relatório Swing":
-				dispose();
-				//Logica gerar Relatorio Swing
-	//			fachadaRelatorio.relatorioSwing();
+			case "Gerar Relatório Edital":
+				controllerRelatorio.gerarRelatorioEditalHTML();
 				break;
 
-			case "Gerar Relatório HTML":
-				dispose();
-			//Logica gerar Relatorio HTML
-	//			fachadaRelatorio.relatorioHTML();
+			case "Gerar Relatório Grupo":
+				controllerRelatorio.gerarRelatorioGrupoHTML();
 				break;
 				
-			case "":
-				dispose();
-				fabricaTela.fabricarTelaPrincipal();
-				break;	
-			
-				
+			case "Gerar Relatório Projeto":
+				controllerRelatorio.gerarRelatorioProjetoHTML();
+				break;
 			}
+		} else {
+			switch (evento) {
+			case "Gerar Relatório Edital":
+				controllerRelatorio.gerarRelatorioEditalSwing();
+				break;
+
+			case "Gerar Relatório Grupo":
+				controllerRelatorio.gerarRelatorioGrupoSwing();;
+				break;
+				
+			case "Gerar Relatório Projeto":
+				controllerRelatorio.gerarRelatorioProjetoSwing();
+				break;
+			}
+		}
 			
 			
 			

@@ -55,7 +55,7 @@ public class Fachada8Relatorio {
 		produtoHTML.mostrarHTML();
 	}
 	
-	public void relatorioGrupolHTML() {
+	public void relatorioGrupoHTML() {
 		RelatorioProjetoHTML relatorioHTML = new RelatorioProjetoHTML(new File("RelatorioGrupoHTML.html"), "");
 		DiretorRelatorio diretor = new DiretorRelatorio(relatorioHTML);
 		diretor.gerarRelatorioGrupo(fachadaGrupo.getGrupos());
