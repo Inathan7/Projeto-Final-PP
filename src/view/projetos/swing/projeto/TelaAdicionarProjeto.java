@@ -205,7 +205,7 @@ public class TelaAdicionarProjeto extends JFrame {
 				} catch (ExceptionMembroDuplicado e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 				}catch(Exception ex){
-					JOptionPane.showMessageDialog(null, "Não exite membro no sistema");
+					JOptionPane.showMessageDialog(null, "Não existe membro no sistema");
 				}
 	
 //				

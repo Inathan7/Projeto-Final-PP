@@ -112,9 +112,8 @@ public class TelaPontoSwing extends JFrame implements TelaPonto {
 						}
 					}
 				}
-			}//else {
-			//	projetosComboBox[i] = controllerProjeto.getProjetos().get(i).getId();
-			//}
+			}
+			
 		}
 
 		listComboBox = new JComboBox<>(projetosComboBox);
@@ -210,7 +209,7 @@ public class TelaPontoSwing extends JFrame implements TelaPonto {
 			case "Logout":
 				for (int i = 0; i < Fachada1Membro.getMembros().size(); i++) {
 					if(controllerMembro.getMembros().get(i).getLogin().equals(textLogin.getText())){
-						Fachada9MembroRealizarLogout.realizarLogout(Fachada1Membro.getMembros().get(i).getLogin());
+						controllerTelaPonto.realizarLogout(Fachada1Membro.getMembros().get(i).getLogin());
 					}
 				}
 				dispose();
@@ -244,10 +243,9 @@ public class TelaPontoSwing extends JFrame implements TelaPonto {
 		if(controllerMembro.getMembros().size() > 0) {
 			for (int i = 0; i<controllerMembro.getMembros().size(); i++) {
 				if(controllerMembro.getMembros().get(i).getLogin().equals(textLogin.getText()) && controllerMembro.getMembros().get(i).getSenha().equals(textSenha.getText())) {
-					Fachada9MembroRealizarLogout.realizarLogin(controllerMembro.getMembros().get(i));
+					controllerTelaPonto.realizarLogin(controllerMembro.getMembros().get(i));
 					try {
 						controllerTelaPonto.autenticarContaEmailProvedor(textLogin.getText(), textSenha.getText(), provedor);
-					//	fachadaAutenticacao.autenticarContaEmailProvedor(textLogin.getText(), textSenha.getText(), provedor);
 					} catch (EmailException e1) {
 						mostrarMensagem("Login ou senha não existe no provedor SMTP");
 					}
@@ -295,9 +293,7 @@ public class TelaPontoSwing extends JFrame implements TelaPonto {
 		for(int i = 0; i < controllerMembro.getMembros().size(); i++){
 			if(controllerMembro.getMembros().get(i).getLogin().equals(textLogin.getText())){
 				LocalDateTime localTime = LocalDateTime.now();
-			//	fachadaBaterPonto.baterPonto(controllerMembro.getMembros().get(i).getParticipacao(),localTime.getHour(),localTime.getHour()+8);
 				controllerTelaPonto.baterPonto(controllerMembro.getMembros().get(i).getParticipacao(),localTime.getHour(),localTime.getHour()+8);
-			//	fachadaBaterPonto.registrarPonto(controllerProjeto.pesquisarProjeto(idProjeto), textLogin.getText());
 				controllerTelaPonto.registrarPonto(controllerProjeto.pesquisarProjeto(idProjeto), textLogin.getText());
 				break;
 			}

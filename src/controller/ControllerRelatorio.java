@@ -32,5 +32,31 @@ public class ControllerRelatorio {
 	}
 	
 	
+	public void gerarRelatorioEditalCompletoSwing() {
+		fachadaRelatorio.relatorioEditalCompletoSwing();
+	}
+	
+	public void gerarRelatorioGrupoCompletoSwing() {
+		fachadaRelatorio.relatorioGrupoCompletoSwing();
+	}
+	
+	public void gerarRelatorioProjetoCompletoSwing() {
+		fachadaRelatorio.relatorioProjetoCompletoSwing();
+	}
+	
+
+	public void gerarRelatorioEditalCompletoHTML() {
+		fachadaRelatorio.relatorioEditalCompletoHTML();
+	}
+	
+	public void gerarRelatorioGrupoCompletoHTML() {
+		fachadaRelatorio.relatorioGrupoCompletoHTML();
+	}
+	
+	public void gerarRelatorioProjetoCompletoHTML() {
+		fachadaRelatorio.relatorioProjetoCompletoHTML();
+	}
+	
+	
 
 }

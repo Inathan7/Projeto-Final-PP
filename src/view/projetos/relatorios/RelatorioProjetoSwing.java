@@ -18,6 +18,7 @@ import javax.swing.text.html.HTMLEditorKit;
 import fachadas.Fachada3Grupo;
 import fachadas.Fachada4Edital;
 import fachadas.Fachada5Projeto;
+import model.projetos.CompositorProjeto;
 import model.projetos.Edital;
 import model.projetos.Grupo;
 import model.projetos.Projeto;
@@ -69,7 +70,7 @@ public class RelatorioProjetoSwing extends JFrame implements MontadorRelatorioPr
 	}
 
 	@Override
-	public String gerarRelatorioEdital(ArrayList<Edital> editais) {
+	public String gerarRelatorioParcialEdital(ArrayList<Edital> editais) {
 		for(Edital edital : editais){
 			relatorio += "[Edital ID: "+edital.getId()+"\n";
 			relatorio += "[NOME] - "+edital.getNome()+"\n";
@@ -83,9 +84,35 @@ public class RelatorioProjetoSwing extends JFrame implements MontadorRelatorioPr
 		return relatorio;
 		
 	}
+	
+	@Override
+	public String gerarRelatorioCompletoEdital(ArrayList<Edital> editais) {
+		for(Edital edital : editais){
+			relatorio += "[Edital ID: "+edital.getId()+"\n";
+			relatorio += "[NOME] - "+edital.getNome()+"\n";
+			relatorio += "[DATA INICIO] - "+edital.getDataInicio()+"\n";
+			relatorio += "[DATA TERMINO] - "+edital.getDataTermino()+"\n";
+			relatorio += "[CUSTO TOTAL] - "+edital.getCustoTotal()+"\n";
+			relatorio += "[CAPITAL NÃO GASTO] - "+edital.getCapitalReaisNaoGastoTotal()+"\n";
+			relatorio += "[CUSTEIO NÃO GASTO] - "+edital.getCusteioReaisNaoGastoTotal()+"\n";
+			relatorio +="[EDITAL ATIVO] - "+edital.getAtivo()+"\n";
+			for (CompositorProjeto componente : edital.getCompositorProjeto()) {
+				relatorio += "[NOME] -" + componente.getNome()+"\n";
+				relatorio += "[CAPITAL REAIS] -" + componente.getCapitalReaisNaoGastoTotal()+"\n";
+				relatorio += "[CUSTEIO REAIS] -" + componente.getCusteioReaisNaoGastoTotal()+"\n";
+				relatorio += "[CUSTO TOTAL] -" + componente.getCustoTotal()+"\n";
+				relatorio += "[INICIO] -" + componente.getDataInicio()+"\n";
+				relatorio += "[TERMINO] -" + componente.getDataTermino()+"\n";
+				relatorio += "[ATIVO] -" + componente.getAtivo()+"\n";
+			}
+		}
+		return relatorio;
+		
+	}
+
 
 	@Override
-	public String gerarRelatorioGrupo(ArrayList<Grupo> grupos) {
+	public String gerarRelatorioParcialGrupo(ArrayList<Grupo> grupos) {
 		for(Grupo grupo : grupos){
 			relatorio += "[Grupo ID: "+grupo.getId()+"\n";
 			relatorio += "[LINK CNPq] - "+grupo.getLinkCNPq()+"\n";
@@ -94,19 +121,65 @@ public class RelatorioProjetoSwing extends JFrame implements MontadorRelatorioPr
 		}
 		return relatorio;
 	}
+	
+	@Override
+	public String gerarRelatorioCompletoGrupo(ArrayList<Grupo> grupos) {
+		for(Grupo grupo : grupos){
+			relatorio += "[Grupo ID: "+grupo.getId()+"\n";
+			relatorio += "[LINK CNPq] - "+grupo.getLinkCNPq()+"\n";
+			relatorio += "[DATA CRIAÇÂO] - "+grupo.getDataCriacao()+"\n";
+			relatorio += "[GRUPO ATIVO] - "+grupo.getAtivo()+"\n";
+			for (CompositorProjeto componente : grupo.getCompositorProjeto()) {
+				relatorio += "[NOME] -" + componente.getNome()+"\n";
+				relatorio += "[CAPITAL REAIS] -" + componente.getCapitalReaisNaoGastoTotal()+"\n";
+				relatorio += "[CUSTEIO REAIS] -" + componente.getCusteioReaisNaoGastoTotal()+"\n";
+				relatorio += "[CUSTO TOTAL] -" + componente.getCustoTotal()+"\n";
+				relatorio += "[INICIO] -" + componente.getDataInicio()+"\n";
+				relatorio += "[TERMINO] -" + componente.getDataTermino()+"\n";
+				relatorio += "[ATIVO] -" + componente.getAtivo()+"\n";
+			}
+		}
+		return relatorio;
+	}
 
 	@Override
-	public String gerarRelatorioProjeto(ArrayList<Projeto> projetos) {
+	public String gerarRelatorioParcialProjeto(ArrayList<Projeto> projetos) {
 		for(Projeto p: projetos){
-			relatorio += "[Projeto ID: "+p.getId()+"\n";
-			relatorio += "Nome do projeto: "+p.getNome()+"\n";
-			relatorio += "Gastos executados capital: "+p.getGastoExecutadoCapitalReais()+"\n";
-			relatorio += "Gastos executados custeio: "+p.getGastoExecutadoCusteioReais()+"\n";
-			relatorio += "Aporte capital: "+p.getAporteCapitalReais()+"\n";
-			relatorio += "Aporte custeio: "+p.getAporteCusteioReais()+"\n";
-			relatorio += "Data inicio: "+p.getDataInicio()+"\n";
-			relatorio += "Data termino: "+p.getDataTermino()+"\n";
-			relatorio += "Custo Total: "+p.getCustoTotal()+"\n";
+			relatorio += "[Projeto ID]: "+p.getId()+"\n";
+			relatorio += "[Nome do projeto]: "+p.getNome()+"\n";
+			relatorio += "[Gastos executados capital]: "+p.getGastoExecutadoCapitalReais()+"\n";
+			relatorio += "[Gastos executados custeio]: "+p.getGastoExecutadoCusteioReais()+"\n";
+			relatorio += "[Aporte capital]: "+p.getAporteCapitalReais()+"\n";
+			relatorio += "[Aporte custeio]: "+p.getAporteCusteioReais()+"\n";
+			relatorio += "[Data inicio]: "+p.getDataInicio()+"\n";
+			relatorio += "[Data termino]: "+p.getDataTermino()+"\n";
+			relatorio += "[Custo Total]: "+p.getCustoTotal()+"\n";
+		}
+		return relatorio;
+		
+	}
+	
+	@Override
+	public String gerarRelatorioCompletoProjeto(ArrayList<Projeto> projetos) {
+		for(Projeto p: projetos){
+			relatorio += "[Projeto ID]: "+p.getId()+"\n";
+			relatorio += "[Nome do projeto]: "+p.getNome()+"\n";
+			relatorio += "[Gastos executados capital]: "+p.getGastoExecutadoCapitalReais()+"\n";
+			relatorio += "[Gastos executados custeio]: "+p.getGastoExecutadoCusteioReais()+"\n";
+			relatorio += "[Aporte capital]: "+p.getAporteCapitalReais()+"\n";
+			relatorio += "[Aporte custeio]: "+p.getAporteCusteioReais()+"\n";
+			relatorio += "[Data inicio]: "+p.getDataInicio()+"\n";
+			relatorio += "[Data termino]: "+p.getDataTermino()+"\n";
+			relatorio += "[Custo Total]: "+p.getCustoTotal()+"\n";
+			for (CompositorProjeto componente : p.getCompositorProjeto()) {
+				relatorio += "[NOME] -" + componente.getNome()+"\n";
+				relatorio += "[CAPITAL REAIS] -" + componente.getCapitalReaisNaoGastoTotal()+"\n";
+				relatorio += "[CUSTEIO REAIS] -" + componente.getCusteioReaisNaoGastoTotal()+"\n";
+				relatorio += "[CUSTO TOTAL] -" + componente.getCustoTotal()+"\n";
+				relatorio += "[INICIO] -" + componente.getDataInicio()+"\n";
+				relatorio += "[TERMINO] -" + componente.getDataTermino()+"\n";
+				relatorio += "[ATIVO] -" + componente.getAtivo()+"\n";
+			}
 		}
 		return relatorio;
 		

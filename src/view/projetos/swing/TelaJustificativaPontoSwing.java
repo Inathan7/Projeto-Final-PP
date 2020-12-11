@@ -102,17 +102,7 @@ public class TelaJustificativaPontoSwing extends JFrame implements TelaJustifica
 		public void actionPerformed(ActionEvent e) {
 			switch(e.getActionCommand()){
 			case "Justificar":
-				ArrayList<ValidarPontoIvalido> validar = new ArrayList<>();
-				validar.add(new ValidarJustificativa());
-				for(int i = 0;i < controllerMembro.getMembros().size();i++){
-					if(controllerMembro.getMembros().get(i).getLogin().equals(txtLogin.getText())){
-						Fachada12JustificarPonto justificar = new Fachada12JustificarPonto();
-						justificar.justificarPontoInvalido(txtJustificatica.getText(), controllerMembro.getMembros().get(i).getParticipacao().getPontoTrabalhado(),
-										controllerMembro.getMembros().get(i).getParticipacao().getHorarioPrevisto(), validar);
-						mostrarMensagem("Justificado!");
-						break;
-					}
-				}
+				justificar();
 				break;
 			case "":
 				dispose();
@@ -121,5 +111,19 @@ public class TelaJustificativaPontoSwing extends JFrame implements TelaJustifica
 			
 		}
 		
+	}
+	@Override
+	public void justificar() {
+		ArrayList<ValidarPontoIvalido> validar = new ArrayList<>();
+		validar.add(new ValidarJustificativa());
+		for(int i = 0;i < controllerMembro.getMembros().size();i++){
+			if(controllerMembro.getMembros().get(i).getLogin().equals(txtLogin.getText())){
+				Fachada12JustificarPonto justificar = new Fachada12JustificarPonto();
+				justificar.justificarPontoInvalido(txtJustificatica.getText(), controllerMembro.getMembros().get(i).getParticipacao().getPontoTrabalhado(),
+								controllerMembro.getMembros().get(i).getParticipacao().getHorarioPrevisto(), validar);
+				mostrarMensagem("Justificado!");
+				break;
+			}
+		}
 	}
 }

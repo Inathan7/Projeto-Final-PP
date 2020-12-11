@@ -73,18 +73,33 @@ public class TelaEscolherTipoRelatorioSwing extends JFrame implements TelaEscolh
 	private void addButtons() {
 		JButton buttonRelatorioEdital = new JButton("Gerar Relatório Edital");
 		buttonRelatorioEdital.setBackground(Color.gray);
-		buttonRelatorioEdital.setBounds(150, 200, 200, 30);
+		buttonRelatorioEdital.setBounds(10, 200, 200, 30);
 		add(buttonRelatorioEdital);
 
 		JButton buttonRelatorioGrupo = new JButton("Gerar Relatório Grupo");
 		buttonRelatorioGrupo.setBackground(Color.gray);
-		buttonRelatorioGrupo.setBounds(150, 250, 200, 30);
+		buttonRelatorioGrupo.setBounds(10, 250, 200, 30);
 		add(buttonRelatorioGrupo);
 
 		JButton buttonRelatorioProjeto = new JButton("Gerar Relatório Projeto");
 		buttonRelatorioProjeto.setBackground(Color.gray);
-		buttonRelatorioProjeto.setBounds(150, 300, 200, 30);
+		buttonRelatorioProjeto.setBounds(10, 300, 200, 30);
 		add(buttonRelatorioProjeto);
+		
+		JButton buttonRelatorioEditalCompleto = new JButton("Gerar Relatório Edital Completo");
+		buttonRelatorioEditalCompleto.setBackground(Color.gray);
+		buttonRelatorioEditalCompleto.setBounds(260, 200, 220, 30);
+		add(buttonRelatorioEditalCompleto);
+
+		JButton buttonRelatorioGrupoCompleto = new JButton("Gerar Relatório Grupo Completo");
+		buttonRelatorioGrupoCompleto.setBackground(Color.gray);
+		buttonRelatorioGrupoCompleto.setBounds(260, 250, 220, 30);
+		add(buttonRelatorioGrupoCompleto);
+
+		JButton buttonRelatorioProjetoCompleto = new JButton("Gerar Relatório Projeto Completo");
+		buttonRelatorioProjetoCompleto.setBackground(Color.gray);
+		buttonRelatorioProjetoCompleto.setBounds(260, 300, 220, 30);
+		add(buttonRelatorioProjetoCompleto);
 
 		JButton buttonVoltar = new JButton(new ImageIcon(getClass().getResource("/voltar.png")));
 		buttonVoltar.setBackground(Color.gray);
@@ -96,6 +111,9 @@ public class TelaEscolherTipoRelatorioSwing extends JFrame implements TelaEscolh
 		buttonRelatorioEdital.addActionListener(ouvinteEscolher);
 		buttonRelatorioGrupo.addActionListener(ouvinteEscolher);
 		buttonRelatorioProjeto.addActionListener(ouvinteEscolher);
+		buttonRelatorioEditalCompleto.addActionListener(ouvinteEscolher);
+		buttonRelatorioGrupoCompleto.addActionListener(ouvinteEscolher);
+		buttonRelatorioProjetoCompleto.addActionListener(ouvinteEscolher);
 		buttonVoltar.addActionListener(ouvinteEscolher);
 
 	}
@@ -124,9 +142,19 @@ public class TelaEscolherTipoRelatorioSwing extends JFrame implements TelaEscolh
 			case "Gerar Relatório Projeto":
 				gerarRelatorioProjeto();
 				break;
+				
+			case "Gerar Relatório Edital Completo":
+				gerarRelatorioEditalCompleto();
+				break;
+
+			case "Gerar Relatório Grupo Completo":
+				gerarRelatorioGrupoCompleto();
+				break;
+
+			case "Gerar Relatório Projeto Completo":
+				gerarRelatorioProjetoCompleto();
+				break;
 			}
-
-
 
 
 		}
@@ -157,6 +185,33 @@ public class TelaEscolherTipoRelatorioSwing extends JFrame implements TelaEscolh
 			controllerRelatorio.gerarRelatorioProjetoHTML();
 		} else {
 			controllerRelatorio.gerarRelatorioProjetoSwing();
+		}
+	}
+
+	@Override
+	public void gerarRelatorioEditalCompleto() {
+		if(relatorioHTML.isSelected()) {
+			controllerRelatorio.gerarRelatorioEditalCompletoHTML();
+		} else {
+			controllerRelatorio.gerarRelatorioEditalCompletoSwing();
+		}
+	}
+
+	@Override
+	public void gerarRelatorioGrupoCompleto() {
+		if(relatorioHTML.isSelected()) {
+			controllerRelatorio.gerarRelatorioGrupoCompletoHTML();
+		} else {
+			controllerRelatorio.gerarRelatorioGrupoCompletoSwing();
+		}
+	}
+
+	@Override
+	public void gerarRelatorioProjetoCompleto() {
+		if(relatorioHTML.isSelected()) {
+			controllerRelatorio.gerarRelatorioProjetoCompletoHTML();
+		} else {
+			controllerRelatorio.gerarRelatorioProjetoCompletoSwing();
 		}
 	}
 

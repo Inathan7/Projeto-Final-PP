@@ -6,17 +6,17 @@ import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
 import org.apache.commons.mail.EmailException;
 
 import fachadas.Fachada11BaterPonto;
 import fachadas.Fachada2Autenticacao;
+import fachadas.Fachada9MembroRealizarLogout;
+import model.autenticacao.Membro;
 import model.autenticacao.TipoProvedorAutenticacao;
 import model.projetos.Participacao;
 import model.projetos.Projeto;
 import model.projetos.ponto.InterfaceAcessoRemotoPonto;
-import model.projetos.ponto.PontoTrabalhado;
 import model.projetos.ponto.RegistradorPontoCentral;
 
 public class ControllerTelaPonto {
@@ -25,6 +25,14 @@ public class ControllerTelaPonto {
 
 	private Fachada2Autenticacao fachadaAutenticacao = new Fachada2Autenticacao();
 	private Fachada11BaterPonto fachadaBaterPonto = new Fachada11BaterPonto();
+	
+	public void realizarLogin(Membro membro) {
+		Fachada9MembroRealizarLogout.realizarLogin(membro);
+	}
+	
+	public void realizarLogout(String login) {
+		Fachada9MembroRealizarLogout.realizarLogout(login);
+	}
 
 	public void  registrarPonto(Projeto projeto, String login) {
 		fachadaBaterPonto.registrarPonto(projeto, login);

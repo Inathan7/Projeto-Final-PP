@@ -74,7 +74,7 @@ public class TelaAutenticacaoSwing extends JFrame implements TelaAutenticacao {
 	public void radioButton(){
 		smtp = new JRadioButton("Provedor SMTP");
 		interno = new JRadioButton("Provedor interno");
-		interno.isSelected();
+		interno.setSelected(true);
 
 		smtp.setBounds(125, 200, 120, 30);
 		interno.setBounds(255, 200, 120, 30);

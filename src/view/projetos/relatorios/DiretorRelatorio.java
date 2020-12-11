@@ -14,52 +14,32 @@ public class DiretorRelatorio {
 		this.montador = montadorRelatorioProjeto;
 	}
 
-	//TODO Dividir os métodos em gerarRelatorioEdital, gerarRelatorioProjeto e gerarRelatorioGrupo
-	//Colocar o construieInterface como uma etapa de montagem.
-	//Retirar códigos HTML
-
-	public void gerarRelatorioEdital(ArrayList<Edital> editais) {
-		montador.gerarRelatorioEdital(editais);
+	public void gerarRelatorioCompletoEdital(ArrayList<Edital> editais) {
+		montador.gerarRelatorioCompletoEdital(editais);
 	}
 
-	public void gerarRelatorioGrupo(ArrayList<Grupo> grupos) {
-		montador.gerarRelatorioGrupo(grupos);
+	public void gerarRelatorioCompletoGrupo(ArrayList<Grupo> grupos) {
+		montador.gerarRelatorioCompletoGrupo(grupos);
 	}
 
-	public void gerarRelatorioProjeto(ArrayList<Projeto> projetos) {
-		montador.gerarRelatorioProjeto(projetos);
+	public void gerarRelatorioCompletoProjeto(ArrayList<Projeto> projetos) {
+		montador.gerarRelatorioCompletoProjeto(projetos);
 	}
 	
-	public void gerarRelatorioParcialGrupo() {
-		
+	public void gerarRelatorioParcialGrupo(ArrayList<Grupo> grupos) {
+		montador.gerarRelatorioParcialGrupo(grupos);
 	}
 	
-	public void gerarRelatorioParcialEdital() {
-		
+	public void gerarRelatorioParcialEdital(ArrayList<Edital> editais) {
+		montador.gerarRelatorioParcialEdital(editais);
 	}
 	
-	public void gerarRelatorioParcialProjeto() {
-		
+	public void gerarRelatorioParcialProjeto(ArrayList<Projeto> projetos) {
+		montador.gerarRelatorioParcialProjeto(projetos);
 	}
 	
 	public void construirInterface() {
 		montador.construirInterface();
 	}
-	
-//	public void gerarRelatorioCompleto() {
-//		gerarRelatorioEdital();
-//		gerarRelatorioGrupo();
-//		gerarRelatorioProjeto();
-//	}
-	
-
-//	public void gerarRelatorioCompleto() {
-//		String relatorio = "";
-//		relatorio += montador.gerarRelatorioEdital() + "<br/>";
-//		relatorio += montador.gerarRelatorioGrupo() + "<br/>";
-//		relatorio += montador.gerarRelatorioProjeto() + "<br/>";
-//
-//		montador.contruirInterface(relatorio);
-//	}
 
 }

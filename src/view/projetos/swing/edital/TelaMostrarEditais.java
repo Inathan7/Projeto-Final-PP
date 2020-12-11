@@ -11,6 +11,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import controller.ControllerEdital;
 import view.autenticacao.FabricaTela;
 import view.autenticacao.swing.FabricaTelaSwing;
 import view.autenticacao.swing.SetLookAndFeel;
@@ -18,6 +19,7 @@ import view.autenticacao.swing.SetLookAndFeel;
 public class TelaMostrarEditais extends JFrame { 
 	
 	private FabricaTela fabricaTela = new FabricaTelaSwing();
+	private ControllerEdital controllerEdital = new ControllerEdital();
 
 	public TelaMostrarEditais() {
 		setTitle("Mostrar Editais");
@@ -51,7 +53,15 @@ public class TelaMostrarEditais extends JFrame {
 	}
 
 	public void addJComboBox() {
-		JComboBox<String> listEditais = new JComboBox<String>();
+		String[] editaisComboBox = new String[controllerEdital.getEditais().size()];
+		for (int i=0; i<controllerEdital.getEditais().size(); i++) {
+			for (int j = 0; j < controllerEdital.getEditais().get(i).getCompositorProjeto().size(); j++) {
+				if (controllerEdital.getEditais().get(i).getCompositorProjeto().get(j).getAtivo()) {
+					editaisComboBox[i] = (controllerEdital.getEditais().get(i).getNome());
+				}
+			}	
+		}
+		JComboBox<String> listEditais = new JComboBox<String>(editaisComboBox);
 		listEditais.setBackground(Color.gray);
 		listEditais.setBounds(190, 110, 120, 30);
 		add(listEditais);

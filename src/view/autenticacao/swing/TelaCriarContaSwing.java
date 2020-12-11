@@ -43,23 +43,29 @@ public class TelaCriarContaSwing extends JFrame implements TelaCriarConta {
 	private JButton buttonParticipar;
 
 	public TelaCriarContaSwing() {
-		setTitle("Criar Conta");
-		setLayout(null);
-		setResizable(false);
-		setSize(800, 600);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
+		if(controllerProjeto.getProjetos().size()==0) {
+			mostrarMensagem("Nenhum projeto para adicionar um membro!");
+			fabricaTela.fabricarTelaPrincipal();
+		}else {
+			setTitle("Criar Conta");
+			setLayout(null);
+			setResizable(false);
+			setSize(800, 600);
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			setLocationRelativeTo(null);
 
+			
+			SetLookAndFeel.addLookAndFeel();
+			addLabels();
+			addTextFields();
+			addRadioButtons();
+			addButtons();
+			addComboBox();
+
+			setVisible(true);
+			repaint();
+		}
 		
-		SetLookAndFeel.addLookAndFeel();
-		addLabels();
-		addTextFields();
-		addRadioButtons();
-		addButtons();
-		addComboBox();
-
-		setVisible(true);
-		repaint();
 	}
 
 	private void addComboBox() {

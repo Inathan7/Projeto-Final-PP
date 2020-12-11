@@ -21,7 +21,7 @@ public class Fachada8Relatorio {
 	public void relatorioEditalSwing() {
 		RelatorioProjetoSwing relatorioSwing = new RelatorioProjetoSwing();
 		DiretorRelatorio diretor = new DiretorRelatorio(relatorioSwing);
-		diretor.gerarRelatorioEdital(fachadaEdital.getEditais());
+		diretor.gerarRelatorioParcialEdital(fachadaEdital.getEditais());
 		diretor.construirInterface();
 		SwingJPanel produtoSwing = relatorioSwing.getProduto();
 		produtoSwing.mostrarJPanel();
@@ -30,7 +30,7 @@ public class Fachada8Relatorio {
 	public void relatorioGrupoSwing() {
 		RelatorioProjetoSwing relatorioSwing = new RelatorioProjetoSwing();
 		DiretorRelatorio diretor = new DiretorRelatorio(relatorioSwing);
-		diretor.gerarRelatorioGrupo(fachadaGrupo.getGrupos());
+		diretor.gerarRelatorioParcialGrupo(fachadaGrupo.getGrupos());
 		diretor.construirInterface();
 		SwingJPanel produtoSwing = relatorioSwing.getProduto();
 		produtoSwing.mostrarJPanel();
@@ -39,7 +39,7 @@ public class Fachada8Relatorio {
 	public void relatorioProjetoSwing() {
 		RelatorioProjetoSwing relatorioSwing = new RelatorioProjetoSwing();
 		DiretorRelatorio diretor = new DiretorRelatorio(relatorioSwing);
-		diretor.gerarRelatorioProjeto(Fachada5Projeto.getProjetosPersistidos());
+		diretor.gerarRelatorioParcialProjeto(Fachada5Projeto.getProjetosPersistidos());
 		diretor.construirInterface();
 		SwingJPanel produtoSwing = relatorioSwing.getProduto();
 		produtoSwing.mostrarJPanel();
@@ -49,7 +49,7 @@ public class Fachada8Relatorio {
 	public void relatorioEditalHTML() {
 		RelatorioProjetoHTML relatorioHTML = new RelatorioProjetoHTML(new File("RelatorioEditalHTML.html"), "");
 		DiretorRelatorio diretor = new DiretorRelatorio(relatorioHTML);
-		diretor.gerarRelatorioEdital(fachadaEdital.getEditais());
+		diretor.gerarRelatorioParcialEdital(fachadaEdital.getEditais());
 		diretor.construirInterface();
 		StringBufferHTML produtoHTML = relatorioHTML.getProduto();
 		produtoHTML.mostrarHTML();
@@ -58,7 +58,7 @@ public class Fachada8Relatorio {
 	public void relatorioGrupoHTML() {
 		RelatorioProjetoHTML relatorioHTML = new RelatorioProjetoHTML(new File("RelatorioGrupoHTML.html"), "");
 		DiretorRelatorio diretor = new DiretorRelatorio(relatorioHTML);
-		diretor.gerarRelatorioGrupo(fachadaGrupo.getGrupos());
+		diretor.gerarRelatorioParcialGrupo(fachadaGrupo.getGrupos());
 		diretor.construirInterface();
 		StringBufferHTML produtoHTML = relatorioHTML.getProduto();
 		produtoHTML.mostrarHTML();
@@ -67,7 +67,64 @@ public class Fachada8Relatorio {
 	public void relatorioProjetoHTML() {
 		RelatorioProjetoHTML relatorioHTML = new RelatorioProjetoHTML(new File("RelatorioProjetoHTML.html"), "");
 		DiretorRelatorio diretor = new DiretorRelatorio(relatorioHTML);
-		diretor.gerarRelatorioProjeto(Fachada5Projeto.getProjetosPersistidos());
+		diretor.gerarRelatorioParcialProjeto(Fachada5Projeto.getProjetosPersistidos());
+		diretor.construirInterface();
+		StringBufferHTML produtoHTML = relatorioHTML.getProduto();
+		produtoHTML.mostrarHTML();
+	}
+	
+	
+	
+	public void relatorioEditalCompletoSwing() {
+		RelatorioProjetoSwing relatorioSwing = new RelatorioProjetoSwing();
+		DiretorRelatorio diretor = new DiretorRelatorio(relatorioSwing);
+		diretor.gerarRelatorioCompletoEdital(fachadaEdital.getEditais());
+		diretor.construirInterface();
+		SwingJPanel produtoSwing = relatorioSwing.getProduto();
+		produtoSwing.mostrarJPanel();
+	}
+	
+	public void relatorioGrupoCompletoSwing() {
+		RelatorioProjetoSwing relatorioSwing = new RelatorioProjetoSwing();
+		DiretorRelatorio diretor = new DiretorRelatorio(relatorioSwing);
+		diretor.gerarRelatorioCompletoGrupo(fachadaGrupo.getGrupos());
+		diretor.construirInterface();
+		SwingJPanel produtoSwing = relatorioSwing.getProduto();
+		produtoSwing.mostrarJPanel();
+	}
+	
+	public void relatorioProjetoCompletoSwing() {
+		RelatorioProjetoSwing relatorioSwing = new RelatorioProjetoSwing();
+		DiretorRelatorio diretor = new DiretorRelatorio(relatorioSwing);
+		diretor.gerarRelatorioCompletoProjeto(Fachada5Projeto.getProjetosPersistidos());
+		diretor.construirInterface();
+		SwingJPanel produtoSwing = relatorioSwing.getProduto();
+		produtoSwing.mostrarJPanel();
+	}
+	
+
+	public void relatorioEditalCompletoHTML() {
+		RelatorioProjetoHTML relatorioHTML = new RelatorioProjetoHTML(new File("RelatorioEditalHTML.html"), "");
+		DiretorRelatorio diretor = new DiretorRelatorio(relatorioHTML);
+		diretor.gerarRelatorioCompletoEdital(fachadaEdital.getEditais());
+		diretor.construirInterface();
+		StringBufferHTML produtoHTML = relatorioHTML.getProduto();
+		produtoHTML.mostrarHTML();
+	}
+	
+	public void relatorioGrupoCompletoHTML() {
+		RelatorioProjetoHTML relatorioHTML = new RelatorioProjetoHTML(new File("RelatorioGrupoHTML.html"), "");
+		DiretorRelatorio diretor = new DiretorRelatorio(relatorioHTML);
+		diretor.gerarRelatorioCompletoGrupo(fachadaGrupo.getGrupos());
+		diretor.construirInterface();
+		StringBufferHTML produtoHTML = relatorioHTML.getProduto();
+		produtoHTML.mostrarHTML();
+	}
+	
+	public void relatorioProjetoCompletoHTML() {
+		RelatorioProjetoHTML relatorioHTML = new RelatorioProjetoHTML(new File("RelatorioProjetoHTML.html"), "");
+		DiretorRelatorio diretor = new DiretorRelatorio(relatorioHTML);
+		diretor.gerarRelatorioCompletoProjeto(Fachada5Projeto.getProjetosPersistidos());
 		diretor.construirInterface();
 		StringBufferHTML produtoHTML = relatorioHTML.getProduto();
 		produtoHTML.mostrarHTML();
