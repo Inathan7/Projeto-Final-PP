@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -74,8 +75,13 @@ public class TelaMostrarGrupos extends JFrame {
 		buttonOk.setBounds(200, 190, 100, 30);
 		add(buttonOk);
 		
-		OuvinteMostrarGrupos ouvinteMostrarGrupos = new OuvinteMostrarGrupos();
+		JButton buttonVoltar = new JButton(new ImageIcon(getClass().getResource("/voltar.png")));
+		buttonVoltar.setBackground(Color.gray);
+		buttonVoltar.setBounds(15, 15, 20, 20);
+		add(buttonVoltar);
 		
+		OuvinteMostrarGrupos ouvinteMostrarGrupos = new OuvinteMostrarGrupos();
+		buttonVoltar.addActionListener(ouvinteMostrarGrupos);
 		buttonOk.addActionListener(ouvinteMostrarGrupos);
 		
 	}
@@ -84,17 +90,8 @@ public class TelaMostrarGrupos extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String evento = e.getActionCommand();
-			
-			switch (evento) {
-			case "Ok":
 				dispose();
 				fabricaTela.fabricarTelaCadastroGrupos();
-			//	new TelaCadastroGruposSwing();
-				break;
-
-			}
-			
 		}
 		
 	}

@@ -76,8 +76,13 @@ public class TelaRemoverProjeto extends JFrame {
 		buttonFinalizar.setBounds(200, 190, 100, 30);
 		add(buttonFinalizar);
 		
-		OuvinteRemoverProjeto ouvinteRemoverProjeto = new OuvinteRemoverProjeto();
+		JButton buttonVoltar = new JButton(new ImageIcon(getClass().getResource("/voltar.png")));
+		buttonVoltar.setBackground(Color.gray);
+		buttonVoltar.setBounds(15, 15, 20, 20);
+		add(buttonVoltar);
 		
+		OuvinteRemoverProjeto ouvinteRemoverProjeto = new OuvinteRemoverProjeto();
+		buttonVoltar.addActionListener(ouvinteRemoverProjeto);
 		buttonFinalizar.addActionListener(ouvinteRemoverProjeto);
 		buttonRemoverProjeto.addActionListener(ouvinteRemoverProjeto);
 	}
@@ -107,6 +112,9 @@ public class TelaRemoverProjeto extends JFrame {
 				fabricaTela.fabricarTelaCadastroProjetos();
 	//			new TelaCadastroGruposSwing();
 				break;
+			case "":
+				dispose();
+				fabricaTela.fabricarTelaCadastroProjetos();
 			}
 			
 		}

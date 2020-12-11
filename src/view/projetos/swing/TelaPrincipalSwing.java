@@ -54,16 +54,19 @@ public class TelaPrincipalSwing extends JFrame implements TelaPrincipal {
 		JMenuItem autenticar = new JMenuItem("Autenticar");
 		JMenuItem configuracoes = new JMenuItem("Configurações de Admin");
 		JMenuItem relatorio = new JMenuItem("Relatorio");
+		JMenuItem justificar = new JMenuItem("Justificar Ponto");
 		
 		cadastrarMembroConta.addActionListener(ouvinteTelaPrincipal);
 		autenticar.addActionListener(ouvinteTelaPrincipal);
 		configuracoes.addActionListener(ouvinteTelaPrincipal);
 		relatorio.addActionListener(ouvinteTelaPrincipal);
+		justificar.addActionListener(ouvinteTelaPrincipal);
 		
 		menu.add(cadastrarMembroConta);
 		menu.add(autenticar);
 		menu.add(configuracoes);
 		menu.add(relatorio);
+		menu.add(justificar);
 		menuBar.add(menu);
 		add(menuBar);
 	
@@ -143,9 +146,12 @@ public class TelaPrincipalSwing extends JFrame implements TelaPrincipal {
 				break;
 			case "Relatorio":
 				dispose();
-				new TelaEscolherTipoRelatorioSwing();
+				fabricaTela.fabricarTelaEscolherTipoRelatorio();
 				break;
-				
+			case "Justificar Ponto":
+				dispose();
+				fabricaTela.fabricarTelaJustificativaPonto();
+				break;
 			}
 			
 		}

@@ -299,8 +299,6 @@ public class TelaPontoSwing extends JFrame implements TelaPonto {
 
 	}
 
-
-
 	@Override
 	public void mostrarMensagem(String mensagem) {
 		JOptionPane.showMessageDialog(null, mensagem);

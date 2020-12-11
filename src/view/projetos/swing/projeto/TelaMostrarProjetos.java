@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -73,23 +74,22 @@ public class TelaMostrarProjetos extends JFrame {
 		buttonOk.setBounds(200, 190, 100, 30);
 		add(buttonOk);
 		
+		JButton buttonVoltar = new JButton(new ImageIcon(getClass().getResource("/voltar.png")));
+		buttonVoltar.setBackground(Color.gray);
+		buttonVoltar.setBounds(15, 15, 20, 20);
+		add(buttonVoltar);
+		
 		OuvinteMostrarProjetos ouvinteMostrarProjetos = new OuvinteMostrarProjetos();
 		buttonOk.addActionListener(ouvinteMostrarProjetos);
-		
+		buttonVoltar.addActionListener(ouvinteMostrarProjetos);
 	}
 	
 	public class OuvinteMostrarProjetos implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String evento = e.getActionCommand();
-			
-			if(evento.equals("Ok")) {
-				dispose();
-				fabricaTela.fabricarTelaCadastroProjetos();
-			}
-				
-			
+			dispose();
+			fabricaTela.fabricarTelaCadastroProjetos();
 		}
 		
 	}

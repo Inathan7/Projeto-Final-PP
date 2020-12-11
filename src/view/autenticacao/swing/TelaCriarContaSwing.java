@@ -213,11 +213,17 @@ public class TelaCriarContaSwing extends JFrame implements TelaCriarConta {
 		buttonProntoMembroConta.setBounds(180, 430, 100, 30);
 		add(buttonProntoMembroConta);
 		
+		JButton buttonVoltar = new JButton(new ImageIcon(getClass().getResource("/voltar.png")));
+		buttonVoltar.setBackground(Color.gray);
+		buttonVoltar.setBounds(15, 15, 20, 20);
+		add(buttonVoltar);
+		
 		OuvinteCriarConta ouvinteCriarConta = new OuvinteCriarConta();
 		
 		buttonParticipar.addActionListener(ouvinteCriarConta);
 		buttonProntoMembroConta.addActionListener(ouvinteCriarConta);
 		buttonCadastrar.addActionListener(ouvinteCriarConta);
+		buttonVoltar.addActionListener(ouvinteCriarConta);
 		
 	}
 	
@@ -240,6 +246,9 @@ public class TelaCriarContaSwing extends JFrame implements TelaCriarConta {
 			case "Cadastrar":
 				cadastrar();
 				break;
+			case "":
+				dispose();
+				fabricaTela.fabricarTelaPrincipal();
 			}
 			
 		}

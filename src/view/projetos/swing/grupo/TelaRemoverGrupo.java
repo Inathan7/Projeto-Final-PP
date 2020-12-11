@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -77,9 +78,15 @@ public class TelaRemoverGrupo extends JFrame {
 		buttonFinalizar.setBounds(200, 190, 100, 30);
 		add(buttonFinalizar);
 		
+		JButton buttonVoltar = new JButton(new ImageIcon(getClass().getResource("/voltar.png")));
+		buttonVoltar.setBackground(Color.gray);
+		buttonVoltar.setBounds(15, 15, 20, 20);
+		add(buttonVoltar);
+
 		OuvinteRemoverGrupos ouvinteRemoverGrupos = new OuvinteRemoverGrupos();
 		buttonFinalizar.addActionListener(ouvinteRemoverGrupos);
 		buttonRemoverGrupo.addActionListener(ouvinteRemoverGrupos);
+		buttonVoltar.addActionListener(ouvinteRemoverGrupos);
 	}
 	
 	public class OuvinteRemoverGrupos implements ActionListener {
@@ -108,6 +115,9 @@ public class TelaRemoverGrupo extends JFrame {
 				fabricaTela.fabricarTelaCadastroGrupos();
 	//			new TelaCadastroGruposSwing();
 				break;
+			case "":
+				dispose();
+				fabricaTela.fabricarTelaCadastroGrupos();
 			}
 			
 		}

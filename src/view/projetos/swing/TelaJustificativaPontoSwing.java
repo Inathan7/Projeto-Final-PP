@@ -1,11 +1,13 @@
 package view.projetos.swing;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,6 +21,8 @@ import model.projetos.ponto.HorarioPrevisto;
 import model.projetos.ponto.ValidarJustificativa;
 import model.projetos.ponto.ValidarPontoIvalido;
 import model.projetos.ponto.ValidarPrevisao;
+import view.autenticacao.FabricaTela;
+import view.autenticacao.swing.FabricaTelaSwing;
 import view.autenticacao.swing.SetLookAndFeel;
 import view.projetos.TelaJustificativaPonto;
 
@@ -26,6 +30,7 @@ public class TelaJustificativaPontoSwing extends JFrame implements TelaJustifica
 	private ControllerMembro controllerMembro = new ControllerMembro();
 	private JTextField txtLogin;
 	private JTextArea txtJustificatica;
+	private FabricaTela fabrica = new FabricaTelaSwing();
 	
 	public TelaJustificativaPontoSwing() {
 		setTitle("Justificar Ponto");
@@ -73,9 +78,17 @@ public class TelaJustificativaPontoSwing extends JFrame implements TelaJustifica
 	}
 
 	private void addButtons() {
+		OuvinteJustificar ouvinte = new OuvinteJustificar();
 		JButton buttonJustificar = new JButton("Justificar");
 		buttonJustificar.setBounds(200, 300, 100, 30);
+		buttonJustificar.addActionListener(ouvinte);
 		add(buttonJustificar);
+		
+		JButton buttonVoltar = new JButton(new ImageIcon(getClass().getResource("/voltar.png")));
+		buttonVoltar.setBackground(Color.gray);
+		buttonVoltar.setBounds(15, 15, 20, 20);
+		buttonVoltar.addActionListener(ouvinte);
+		add(buttonVoltar);
 	}
 	
 
@@ -87,19 +100,26 @@ public class TelaJustificativaPontoSwing extends JFrame implements TelaJustifica
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			ArrayList<ValidarPontoIvalido> validar = new ArrayList<>();
-			validar.add(new ValidarJustificativa());
-			for(int i = 0;i < controllerMembro.getMembros().size();i++){
-				if(controllerMembro.getMembros().get(i).getLogin().equals(txtLogin.getText())){
-					Fachada12JustificarPonto justificar = new Fachada12JustificarPonto();
-					justificar.justificarPontoInvalido(txtJustificatica.getText(), controllerMembro.getMembros().get(i).getParticipacao().getPontoTrabalhado(), new HorarioPrevisto(), validar);
+			switch(e.getActionCommand()){
+			case "Justificar":
+				ArrayList<ValidarPontoIvalido> validar = new ArrayList<>();
+				validar.add(new ValidarJustificativa());
+				for(int i = 0;i < controllerMembro.getMembros().size();i++){
+					if(controllerMembro.getMembros().get(i).getLogin().equals(txtLogin.getText())){
+						Fachada12JustificarPonto justificar = new Fachada12JustificarPonto();
+						justificar.justificarPontoInvalido(txtJustificatica.getText(), controllerMembro.getMembros().get(i).getParticipacao().getPontoTrabalhado(),
+										controllerMembro.getMembros().get(i).getParticipacao().getHorarioPrevisto(), validar);
+						mostrarMensagem("Justificado!");
+						break;
+					}
 				}
+				break;
+			case "":
+				dispose();
+				fabrica.fabricarTelaPrincipal();
 			}
 			
 		}
 		
-	}
-	public static void main(String[] args) {
-		new TelaJustificativaPontoSwing();
 	}
 }
