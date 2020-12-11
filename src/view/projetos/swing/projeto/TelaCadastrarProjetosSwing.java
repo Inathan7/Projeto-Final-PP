@@ -87,23 +87,19 @@ public class TelaCadastrarProjetosSwing extends JFrame implements TelaCadastroPr
 			
 			switch (evento) {
 			case "Adicionar":
-				dispose();
-				new TelaAdicionarProjeto();
+				adicionarProjeto();
 				break;
 
 			case "Remover":
-				dispose();
-				new TelaRemoverProjeto();
+				removerProjeto();
 				break;
 				
 			case "Atualizar":
-				dispose();
-				new TelaAtualizarProjeto();
+				atualizarProjeto();
 				break;
 			
 			case "Projetos":
-				dispose();
-				new TelaMostrarProjetos();
+				mostrarProjetos();
 				break;
 				
 			case "":
@@ -117,8 +113,27 @@ public class TelaCadastrarProjetosSwing extends JFrame implements TelaCadastroPr
 	}
 
 	@Override
-	public void mostrarMensagem(String mensagem) {
-		JOptionPane.showMessageDialog(null, mensagem);
+	public void adicionarProjeto() {
+		dispose();
+		new TelaAdicionarProjeto();
+	}
+
+	@Override
+	public void removerProjeto() {
+		dispose();
+		new TelaRemoverProjeto();
+	}
+
+	@Override
+	public void atualizarProjeto() {
+		dispose();
+		new TelaAtualizarProjeto();
+	}
+
+	@Override
+	public void mostrarProjetos() {
+		dispose();
+		new TelaMostrarProjetos();
 	}
 
 }

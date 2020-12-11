@@ -7,27 +7,17 @@ import view.autenticacao.TelaCriarConta;
 import view.projetos.TelaCadastroEditais;
 import view.projetos.TelaCadastroGrupos;
 import view.projetos.TelaCadastroProjetos;
+import view.projetos.TelaEscolherTipoRelatorio;
 import view.projetos.TelaJustificativaPonto;
 import view.projetos.TelaPonto;
 import view.projetos.TelaPrincipal;
+import view.projetos.swing.TelaEscolherTipoRelatorioSwing;
 import view.projetos.swing.TelaJustificativaPontoSwing;
 import view.projetos.swing.TelaPontoSwing;
 import view.projetos.swing.TelaPrincipalSwing;
-import view.projetos.swing.edital.TelaAdicionarEdital;
-import view.projetos.swing.edital.TelaAtualizarEdital;
 import view.projetos.swing.edital.TelaCadastrarEditaisSwing;
-import view.projetos.swing.edital.TelaMostrarEditais;
-import view.projetos.swing.edital.TelaRemoverEdital;
-import view.projetos.swing.grupo.TelaAdicionarGrupo;
-import view.projetos.swing.grupo.TelaAtualizarGrupo;
 import view.projetos.swing.grupo.TelaCadastroGruposSwing;
-import view.projetos.swing.grupo.TelaMostrarGrupos;
-import view.projetos.swing.grupo.TelaRemoverGrupo;
-import view.projetos.swing.projeto.TelaAdicionarProjeto;
-import view.projetos.swing.projeto.TelaAtualizarProjeto;
 import view.projetos.swing.projeto.TelaCadastrarProjetosSwing;
-import view.projetos.swing.projeto.TelaMostrarProjetos;
-import view.projetos.swing.projeto.TelaRemoverProjeto;
 
 public class FabricaTelaSwing implements FabricaTela {
 
@@ -74,6 +64,11 @@ public class FabricaTelaSwing implements FabricaTela {
 	@Override
 	public TelaPrincipal fabricarTelaPrincipal() {
 		return new TelaPrincipalSwing();
+	}
+
+	@Override
+	public TelaEscolherTipoRelatorio fabricarTelaEscolherTipoRelatorio() {
+		return new TelaEscolherTipoRelatorioSwing();
 	}
 
 }

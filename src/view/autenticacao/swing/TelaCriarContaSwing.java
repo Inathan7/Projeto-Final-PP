@@ -230,51 +230,15 @@ public class TelaCriarContaSwing extends JFrame implements TelaCriarConta {
 			
 			switch (evento) {
 			case "Pronto":
-				String email = txtEmail.getText();
-				long matricula = Long.parseLong(txtMatricula.getText());
-				String nome = txtNome.getText();
-				String login = txtLogin.getText();
-				String senha = txtSenha.getText();
-				String tipoConta = "";
-				
-				if (radioBttIFPB.isSelected()) {
-					tipoConta = "IFPB";
-				} else {
-					tipoConta = "Livre";
-				}
-				
-				controllerCadastrarContaMembro.addMembro(email, matricula, nome, login, senha, tipoConta);
-				buttonCadastrar.setEnabled(true);
-				buttonParticipar.setEnabled(true);
-				
+				cadastrarMembroConta();
 				break;
 
 			case "Participar":
-				int idProjeto = (Integer) listProjetos.getSelectedItem();
-				
-				float aporteCusteioMensalReais = Float.parseFloat(txtCusteio.getText());
-				short qtdMesesCusteados = Short.parseShort(txtMesesCusteados.getText());
-				short qtdMesesPagos = Short.parseShort(txtMesesPagos.getText());
-				
-				for (int i = 0; i < controllerProjeto.getProjetos().size(); i++) {
-					if(controllerProjeto.getProjetos().get(i).equals(controllerProjeto.pesquisarProjeto(idProjeto))) {
-						controllerCadastrarContaMembro.addParticipacao(controllerProjeto.pesquisarProjeto(idProjeto), aporteCusteioMensalReais, qtdMesesCusteados, qtdMesesPagos);
-						try {
-							controllerProjeto.pesquisarProjeto(idProjeto).adicionarMembro(controllerCadastrarContaMembro.getMembro());
-							controllerProjeto.atualizarProjeto();
-							mostrarMensagem("Adiconado!");
-						} catch (ExceptionMembroDuplicado e1) {
-							JOptionPane.showMessageDialog(null, e1.getMessage());
-						}
-					}
-				}
-				
+				participarDeProjeto();
 				break;
 				
 			case "Cadastrar":
-				mostrarMensagem("Cadastro Concluído!");
-				dispose();
-				fabricaTela.fabricarTelaAutenticacao();
+				cadastrar();
 				break;
 			}
 			
@@ -286,6 +250,55 @@ public class TelaCriarContaSwing extends JFrame implements TelaCriarConta {
 	@Override
 	public void mostrarMensagem(String mensagem) {
 		JOptionPane.showMessageDialog(null, mensagem);
+	}
+
+	@Override
+	public void participarDeProjeto() {
+		int idProjeto = (Integer) listProjetos.getSelectedItem();
+		
+		float aporteCusteioMensalReais = Float.parseFloat(txtCusteio.getText());
+		short qtdMesesCusteados = Short.parseShort(txtMesesCusteados.getText());
+		short qtdMesesPagos = Short.parseShort(txtMesesPagos.getText());
+		
+		for (int i = 0; i < controllerProjeto.getProjetos().size(); i++) {
+			if(controllerProjeto.getProjetos().get(i).equals(controllerProjeto.pesquisarProjeto(idProjeto))) {
+				controllerCadastrarContaMembro.addParticipacao(controllerProjeto.pesquisarProjeto(idProjeto), aporteCusteioMensalReais, qtdMesesCusteados, qtdMesesPagos);
+				try {
+					controllerProjeto.pesquisarProjeto(idProjeto).adicionarMembro(controllerCadastrarContaMembro.getMembro());
+					controllerProjeto.atualizarProjeto();
+					mostrarMensagem("Adiconado!");
+				} catch (ExceptionMembroDuplicado e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
+			}
+		}
+	}
+
+	@Override
+	public void cadastrar() {
+		mostrarMensagem("Cadastro Concluído!");
+		dispose();
+		fabricaTela.fabricarTelaAutenticacao();
+	}
+
+	@Override
+	public void cadastrarMembroConta() {
+		String email = txtEmail.getText();
+		long matricula = Long.parseLong(txtMatricula.getText());
+		String nome = txtNome.getText();
+		String login = txtLogin.getText();
+		String senha = txtSenha.getText();
+		String tipoConta = "";
+		
+		if (radioBttIFPB.isSelected()) {
+			tipoConta = "IFPB";
+		} else {
+			tipoConta = "Livre";
+		}
+		
+		controllerCadastrarContaMembro.addMembro(email, matricula, nome, login, senha, tipoConta);
+		buttonCadastrar.setEnabled(true);
+		buttonParticipar.setEnabled(true);
 	}
 	
 }

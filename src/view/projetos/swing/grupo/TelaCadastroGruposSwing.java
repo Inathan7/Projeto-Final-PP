@@ -87,23 +87,19 @@ public class TelaCadastroGruposSwing extends JFrame implements TelaCadastroGrupo
 			
 			switch (evento) {
 			case "Adicionar":
-				dispose();
-				new TelaAdicionarGrupo();
+				adicionarGrupo();
 				break;
 
 			case "Remover":
-				dispose();
-				new TelaRemoverGrupo();
+				removerGrupo();
 				break;
 				
 			case "Atualizar":
-				dispose();
-				new TelaAtualizarGrupo();
+				atualizarGrupo();
 				break;
 			
 			case "Grupos":
-				dispose();
-				new TelaMostrarGrupos();
+				mostrarGrupos();
 				break;
 				
 			case "":
@@ -117,8 +113,29 @@ public class TelaCadastroGruposSwing extends JFrame implements TelaCadastroGrupo
 	}
 
 	@Override
-	public void mostrarMensagem(String mensagem) {
-		JOptionPane.showMessageDialog(null, mensagem);
+	public void adicionarGrupo() {
+		dispose();
+		new TelaAdicionarGrupo();
 	}
+
+	@Override
+	public void removerGrupo() {
+		dispose();
+		new TelaRemoverGrupo();
+	}
+
+	@Override
+	public void atualizarGrupo() {
+		dispose();
+		new TelaAtualizarGrupo();
+	}
+
+	@Override
+	public void mostrarGrupos() {
+		dispose();
+		new TelaMostrarGrupos();
+	}
+
+	
 
 }

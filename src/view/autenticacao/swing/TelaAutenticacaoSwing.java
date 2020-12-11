@@ -26,6 +26,7 @@ import view.autenticacao.TelaAutenticacao;
 public class TelaAutenticacaoSwing extends JFrame implements TelaAutenticacao {
 	
 	private FabricaTela fabricaTela = new FabricaTelaSwing();
+	private ControllerTelaAutenticacao controller = new ControllerTelaAutenticacao();;
 	
 	private JTextField campoLogin;
 	private JPasswordField campoSenha;
@@ -116,7 +117,6 @@ public class TelaAutenticacaoSwing extends JFrame implements TelaAutenticacao {
 			
 			String evento = e.getActionCommand();
 			
-			ControllerTelaAutenticacao controller = new ControllerTelaAutenticacao();
 			String senha = new String(campoSenha.getPassword());
 			TipoProvedorAutenticacao provedor = null;
 			String tipoProvedor = "";
@@ -130,35 +130,21 @@ public class TelaAutenticacaoSwing extends JFrame implements TelaAutenticacao {
 			
 			switch (evento) {
 			case "Autenticar":
-				try {
-					if ((controller.autenticarContaEmail(campoLogin.getText(), senha, provedor) == null)) {
-						mostrarMensagem("Campos Vazios!");
-					} else {
-						mostrarMensagem("Bem Vindo!");
-						dispose();
-						fabricaTela.fabricarTelaPrincipal();
-					}
-			//		controller.autenticarContaEmail(campoLogin.getText(), senha, provedor);
-					
-				} catch (EmailException e2) {
-					mostrarMensagem("Não foi possível logar!");
-				}
-				
+				autenticar(senha, provedor);
 				break;
 
 			case "Cadastrar":
-				dispose();
-				fabricaTela.fabricarTelaCriarConta();
+				cadastrar();
 				break;
 			}
 			
-			Membro m = null;
+		//	Membro m = null;
 				try {
-					m = controller.autenticarContaEmail(campoLogin.getText(), senha, provedor);
-					if(m == null){
+				//	m = controller.autenticarContaEmail(campoLogin.getText(), senha, provedor);
+					if(controller.autenticarContaEmail(campoLogin.getText(), senha, provedor) == null){
 						mostrarMensagem("Esse login ou senha não existe");
 					}else{
-						mostrarMensagem(tipoProvedor+m.getNome());
+						mostrarMensagem(tipoProvedor+controller.autenticarContaEmail(campoLogin.getText(), senha, provedor).getNome());
 					}
 				} catch (EmailException e1) {
 					mostrarMensagem("Esse login ou senha não foi encontrado\n No provedor SMTP");
@@ -170,6 +156,30 @@ public class TelaAutenticacaoSwing extends JFrame implements TelaAutenticacao {
 	@Override
 	public void mostrarMensagem(String mensagem) {
 		JOptionPane.showMessageDialog(null, mensagem);
+	}
+	
+	@Override
+	public void autenticar(String senha, TipoProvedorAutenticacao provedor) {
+		try {
+			if ((controller.autenticarContaEmail(campoLogin.getText(), senha, provedor) == null)) {
+				mostrarMensagem("Campos Vazios!");
+			} else {
+				mostrarMensagem("Bem Vindo!");
+				dispose();
+				fabricaTela.fabricarTelaPrincipal();
+			}
+			
+		} catch (EmailException e2) {
+			mostrarMensagem("Não foi possível logar!");
+		}
+		
+	}
+	
+	@Override
+	public void cadastrar() {
+		dispose();
+		fabricaTela.fabricarTelaCriarConta();
+		
 	}
 
 }

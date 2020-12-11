@@ -112,27 +112,19 @@ public class TelaPrincipalSwing extends JFrame implements TelaPrincipal {
 			
 			switch (evento) {
 			case "Projetos":
-				dispose();
-				fabricaTela.fabricarTelaCadastroProjetos();
-		//		new TelaCadastrarProjetosSwing();
+				projetos();
 				break;
 
 			case "Grupos":
-				dispose();
-				fabricaTela.fabricarTelaCadastroGrupos();
-		//		new TelaCadastroGruposSwing();
+				grupos();
 				break;
 				
 			case "Editais":
-				dispose();
-				fabricaTela.fabricarTelaCadastrarEditais();
-		//		new TelaCadastrarEditaisSwing();
+				editais();
 				break;
 			
 			case "Pontos":
-				dispose();
-				fabricaTela.fabricarTelaPonto();
-		//		new TelaPontoSwing();
+				pontos();
 				break;
 				
 			case "Cadastrar Membro/Conta":
@@ -151,7 +143,7 @@ public class TelaPrincipalSwing extends JFrame implements TelaPrincipal {
 				break;
 			case "Relatorio":
 				dispose();
-				new TelaEscolherTipoRelatorio();
+				new TelaEscolherTipoRelatorioSwing();
 				break;
 				
 			}
@@ -161,7 +153,28 @@ public class TelaPrincipalSwing extends JFrame implements TelaPrincipal {
 	}
 
 	@Override
-	public void mostrarMensagem(String mensagem) {
-		JOptionPane.showMessageDialog(null, mensagem);
+	public void projetos() {
+		dispose();
+		fabricaTela.fabricarTelaCadastroProjetos();
 	}
+
+	@Override
+	public void grupos() {
+		dispose();
+		fabricaTela.fabricarTelaCadastroGrupos();
+	}
+
+	@Override
+	public void editais() {
+		dispose();
+		fabricaTela.fabricarTelaCadastrarEditais();
+	}
+
+	@Override
+	public void pontos() {
+		dispose();
+		fabricaTela.fabricarTelaPonto();
+	}
+
+	
 }

@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import controller.ControllerMembro;
-import model.autenticacao.Membro;
 import view.autenticacao.FabricaTela;
 import view.autenticacao.TelaConfiguracaoAdmin;
 
@@ -81,17 +80,13 @@ public class TelaConfiguracaoAdminSwing extends JFrame implements TelaConfigurac
 		add(buttonVoltar);
 		
 	}
-	public class OuvinteBotao implements ActionListener{
+	public class OuvinteBotao implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
 			if(e.getActionCommand().equals("Tornar Administrador")) {
-				long matricula = (Long)listMembros.getSelectedItem();
-				controllerMembro.tornarMembroAdim(controllerMembro.pesquisar(matricula));
-			//	JOptionPane.showMessageDialog(null, "Membro Agora é um Administrador");
-				mostrarMensagem("Membro Agora é um Administrador");
-				controllerMembro.atualizar();
+				tornarAdministrador();
 			}else {
 				dispose();
 				fabricaTela.fabricarTelaPrincipal();
@@ -103,6 +98,14 @@ public class TelaConfiguracaoAdminSwing extends JFrame implements TelaConfigurac
 	@Override
 	public void mostrarMensagem(String mensagem) {
 		JOptionPane.showMessageDialog(null, mensagem);
+	}
+
+	@Override
+	public void tornarAdministrador() {
+		long matricula = (Long)listMembros.getSelectedItem();
+		controllerMembro.tornarMembroAdim(controllerMembro.pesquisar(matricula));
+		mostrarMensagem("Membro Agora é um Administrador");
+		controllerMembro.atualizar();
 	}
 
 }

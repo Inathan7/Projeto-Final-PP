@@ -90,23 +90,19 @@ public class TelaCadastrarEditaisSwing extends JFrame implements TelaCadastroEdi
 			
 			switch (evento) {
 			case "Adicionar":
-				dispose();
-				new TelaAdicionarEdital();
+				adicionarEdital();
 				break;
 
 			case "Remover":
-				dispose();
-				new TelaRemoverEdital();
+				removerEdital();
 				break;
 				
 			case "Atualizar":
-				dispose();
-				new TelaAtualizarEdital();
+				atualizarEdital();
 				break;
 			
 			case "Editais":
-				dispose();
-				new TelaMostrarEditais();
+				mostrarEditais();
 				break;
 				
 			case "":
@@ -119,9 +115,29 @@ public class TelaCadastrarEditaisSwing extends JFrame implements TelaCadastroEdi
 	}
 
 	@Override
-	public void mostrarMensagem(String mensagem) {
-		JOptionPane.showMessageDialog(null, mensagem);
-		
+	public void adicionarEdital() {
+		dispose();
+		new TelaAdicionarEdital();
 	}
+
+	@Override
+	public void removerEdital() {
+		dispose();
+		new TelaRemoverEdital();
+	}
+
+	@Override
+	public void atualizarEdital() {
+		dispose();
+		new TelaAtualizarEdital();
+	}
+
+	@Override
+	public void mostrarEditais() {
+		dispose();
+		new TelaMostrarEditais();
+	}
+
+	
 
 }

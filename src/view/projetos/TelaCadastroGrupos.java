@@ -1,7 +1,13 @@
 package view.projetos;
 
 public interface TelaCadastroGrupos {
-	
-	public void mostrarMensagem(String mensagem);
+
+	public void adicionarGrupo();
+
+	public void removerGrupo();
+
+	public void atualizarGrupo();
+
+	public void mostrarGrupos();
 
 }

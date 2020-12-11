@@ -2,6 +2,12 @@ package view.projetos;
 
 public interface TelaCadastroProjetos {
 	
-	public void mostrarMensagem(String mensagem);
+	public void adicionarProjeto();
+
+	public void removerProjeto();
+
+	public void atualizarProjeto();
+
+	public void mostrarProjetos();
 
 }
