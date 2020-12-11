@@ -1,13 +1,17 @@
 package view.projetos.swing;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 
 import fachadas.Fachada8Relatorio;
 import view.autenticacao.FabricaTela;
@@ -19,32 +23,67 @@ public class TelaEscolherTipoRelatorio extends JFrame {
 	private FabricaTela fabricaTela = new FabricaTelaSwing();
 	private Fachada8Relatorio fachadaRelatorio = new Fachada8Relatorio();
 	
+	private JRadioButton relatorioHTML;
+	private JRadioButton relatorioSwing;
+	
 	public TelaEscolherTipoRelatorio() {
 		setTitle("Menu");
 		setLayout(null);
 		setResizable(false);
-		setSize(300, 170);
+		setSize(500, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 
 		
 		SetLookAndFeel.addLookAndFeel();
+		addLabels();
+		addRadioButtons();
 		addButtons();
 
 		setVisible(true);
 		repaint();
 	}
+	
+	private void addLabels() {
+		JLabel labelTitulo = new JLabel("Menu Relatório");
+		labelTitulo.setFont(new Font("Monospaced", Font.BOLD, 30));
+		labelTitulo.setBounds(130, 20, 270, 50);
+		add(labelTitulo);
+		
+	}
+
+	private void addRadioButtons() {
+		relatorioHTML= new JRadioButton("Relatório HTML");
+		relatorioHTML.setBounds(50, 100, 150, 30);
+		relatorioHTML.setSelected(true);
+
+		relatorioSwing = new JRadioButton("Relatório Swing");
+		relatorioSwing.setBounds(300, 100, 150, 30);
+
+		ButtonGroup group = new ButtonGroup();
+		group.add(relatorioHTML);
+		group.add(relatorioSwing);
+
+		add(relatorioHTML);
+		add(relatorioSwing);
+		
+	}
 
 	private void addButtons() {
-		JButton buttonRelatorioSwing = new JButton("Gerar Relatório Swing");
-		buttonRelatorioSwing.setBackground(Color.gray);
-		buttonRelatorioSwing.setBounds(50, 40, 200, 30);
-		add(buttonRelatorioSwing);
+		JButton buttonRelatorioEdital = new JButton("Gerar Relatório Edital");
+		buttonRelatorioEdital.setBackground(Color.gray);
+		buttonRelatorioEdital.setBounds(150, 200, 200, 30);
+		add(buttonRelatorioEdital);
 		
-		JButton buttonRelatorioHTML = new JButton("Gerar Relatório HTML");
-		buttonRelatorioHTML.setBackground(Color.gray);
-		buttonRelatorioHTML.setBounds(50, 90, 200, 30);
-		add(buttonRelatorioHTML);
+		JButton buttonRelatorioGrupo = new JButton("Gerar Relatório Grupo");
+		buttonRelatorioGrupo.setBackground(Color.gray);
+		buttonRelatorioGrupo.setBounds(150, 250, 200, 30);
+		add(buttonRelatorioGrupo);
+		
+		JButton buttonRelatorioProjeto = new JButton("Gerar Relatório Projeto");
+		buttonRelatorioProjeto.setBackground(Color.gray);
+		buttonRelatorioProjeto.setBounds(150, 300, 200, 30);
+		add(buttonRelatorioProjeto);
 		
 		JButton buttonVoltar = new JButton(new ImageIcon(getClass().getResource("/voltar.png")));
 		buttonVoltar.setBackground(Color.gray);
@@ -53,8 +92,9 @@ public class TelaEscolherTipoRelatorio extends JFrame {
 		
 		OuvinteEscolher ouvinteEscolher = new OuvinteEscolher();
 		
-		buttonRelatorioHTML.addActionListener(ouvinteEscolher);
-		buttonRelatorioSwing.addActionListener(ouvinteEscolher);
+		buttonRelatorioEdital.addActionListener(ouvinteEscolher);
+		buttonRelatorioGrupo.addActionListener(ouvinteEscolher);
+		buttonRelatorioProjeto.addActionListener(ouvinteEscolher);
 		buttonVoltar.addActionListener(ouvinteEscolher);
 		
 	}
