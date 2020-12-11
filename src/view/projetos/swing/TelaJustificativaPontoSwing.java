@@ -1,6 +1,10 @@
 package view.projetos.swing;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,10 +13,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import controller.ControllerMembro;
+import fachadas.Fachada12JustificarPonto;
+import model.projetos.ponto.HorarioPrevisto;
+import model.projetos.ponto.ValidarJustificativa;
+import model.projetos.ponto.ValidarPontoIvalido;
+import model.projetos.ponto.ValidarPrevisao;
 import view.autenticacao.swing.SetLookAndFeel;
 import view.projetos.TelaJustificativaPonto;
 
 public class TelaJustificativaPontoSwing extends JFrame implements TelaJustificativaPonto {
+	private ControllerMembro controllerMembro = new ControllerMembro();
+	private JTextField txtLogin;
+	private JTextArea txtJustificatica;
 	
 	public TelaJustificativaPontoSwing() {
 		setTitle("Justificar Ponto");
@@ -50,11 +63,11 @@ public class TelaJustificativaPontoSwing extends JFrame implements TelaJustifica
 	}
 
 	private void addTextField() {
-		JTextField txtLogin = new JTextField();
+		txtLogin = new JTextField();
 		txtLogin.setBounds(150, 90, 200, 30);
 		add(txtLogin);
 		
-		JTextArea txtJustificatica = new JTextArea();
+		txtJustificatica = new JTextArea();
 		txtJustificatica.setBounds(100, 180, 300, 70);
 		add(txtJustificatica);
 	}
@@ -70,5 +83,23 @@ public class TelaJustificativaPontoSwing extends JFrame implements TelaJustifica
 	public void mostrarMensagem(String mensagem) {
 		JOptionPane.showMessageDialog(null, mensagem);
 	}
+	public class OuvinteJustificar implements ActionListener{
 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			ArrayList<ValidarPontoIvalido> validar = new ArrayList<>();
+			validar.add(new ValidarJustificativa());
+			for(int i = 0;i < controllerMembro.getMembros().size();i++){
+				if(controllerMembro.getMembros().get(i).getLogin().equals(txtLogin.getText())){
+					Fachada12JustificarPonto justificar = new Fachada12JustificarPonto();
+					justificar.justificarPontoInvalido(txtJustificatica.getText(), controllerMembro.getMembros().get(i).getParticipacao().getPontoTrabalhado(), new HorarioPrevisto(), validar);
+				}
+			}
+			
+		}
+		
+	}
+	public static void main(String[] args) {
+		new TelaJustificativaPontoSwing();
+	}
 }

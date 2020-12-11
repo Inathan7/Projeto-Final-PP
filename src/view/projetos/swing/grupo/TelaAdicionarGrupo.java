@@ -193,7 +193,7 @@ public class TelaAdicionarGrupo extends JFrame {
 			case "Add":
 				int id = (Integer) listProjetos.getSelectedItem();
 
-				controllerGrupo.addProjetoAoGrupo(controllerGrupo.pesquisarGrupo(controllerGrupo.getGrupos().size()-1), controllerProjeto.pesquisarProjeto(id));
+				controllerGrupo.addProjetoAoGrupo(controllerGrupo.pesquisarGrupo(controllerGrupo.getGrupos().size()), controllerProjeto.pesquisarProjeto(id));
 				for (int i = 0; i < controllerProjeto.pesquisarProjeto(id).getMembros().size(); i++) {
 						controllerGrupo.addMembroAogrupo(controllerProjeto.pesquisarProjeto(id).getMembros().get(i), controllerGrupo.getGrupos().size());
 					}

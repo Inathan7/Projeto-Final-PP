@@ -10,6 +10,8 @@ import model.autenticacao.ContaEmailLivre;
 import model.autenticacao.Membro;
 import model.projetos.Participacao;
 import model.projetos.Projeto;
+import model.projetos.ponto.HorarioPrevisto;
+import model.projetos.ponto.PontoTrabalhado;
 
 public class ControllerCadastrarContaMembro {
 	
@@ -54,8 +56,10 @@ public class ControllerCadastrarContaMembro {
 		participacao.setNome(membro.getNome());
 		participacao.setQtdMesesCusteados(qtdMesesCusteados);
 		participacao.setQtdMesesPagos(qtdMesesPagos);
-		membro.setParticipacao(participacao);
 		participacao.adicionar(projeto);
+		participacao.adicionarPontoTrabalhado(new PontoTrabalhado());
+		participacao.adicionarHorarioPrevisto(new HorarioPrevisto());
+		membro.setParticipacao(participacao);
 		fachadaMembro.atualizarMembro();
 	}
 	public Membro getMembro(){
